@@ -42,13 +42,30 @@ animations = [{
 
 [sub_resource type="LabelSettings" id="LabelSettings_wnmds"]
 font = ExtResource("3_wnmds")
-font_size = 12
+font_size = 8
 font_color = Color(0.5833335, 0, 1, 1)
 
 [node name="DemoMap" type="Node2D" unique_id=870334134]
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=514298491]
 position = Vector2(36.000004, 75)
+scale = Vector2(6.2734375, 0.37500024)
+texture = ExtResource("1_rj4tu")
+
+[node name="Icon2" type="Sprite2D" parent="." unique_id=1859147652]
+position = Vector2(16.000006, -117)
+scale = Vector2(6.2734375, 0.37500024)
+texture = ExtResource("1_rj4tu")
+
+[node name="Icon3" type="Sprite2D" parent="." unique_id=293016030]
+position = Vector2(-181, -10)
+rotation = 1.5596361
+scale = Vector2(6.2734375, 0.37500024)
+texture = ExtResource("1_rj4tu")
+
+[node name="Icon4" type="Sprite2D" parent="." unique_id=1092429972]
+position = Vector2(170, -17)
+rotation = 1.5596361
 scale = Vector2(6.2734375, 0.37500024)
 texture = ExtResource("1_rj4tu")
 
@@ -61,9 +78,9 @@ autoplay = "idle"
 zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=109486675]
-offset_left = -167.0
-offset_top = -74.0
-offset_right = 173.0
-offset_bottom = -18.0
+offset_left = -113.0
+offset_top = -83.0
+offset_right = 113.0
+offset_bottom = -27.0
 text = "Alan James Richardson Soto Canalizo"
 label_settings = SubResource("LabelSettings_wnmds")
