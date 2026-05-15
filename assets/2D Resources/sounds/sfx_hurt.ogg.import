@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b4j5sn3y5pg3d"
+path="res://.godot/imported/sfx_hurt.ogg-3d3dc9fc95475367855344b05e426d54.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/2D Resources/sounds/sfx_hurt.ogg"
+dest_files=["res://.godot/imported/sfx_hurt.ogg-3d3dc9fc95475367855344b05e426d54.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

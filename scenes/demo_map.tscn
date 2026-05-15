@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://7qcq1de4v2g5"]
+
+[ext_resource type="Texture2D" uid="uid://buo8ba70qwwcn" path="res://scenes/icon.svg" id="1_rj4tu"]
+[ext_resource type="Texture2D" uid="uid://b1yl681qa4sb3" path="res://assets/2D Resources/characters/DinoSprites - doux.png" id="2_wnmds"]
+[ext_resource type="FontFile" uid="uid://dtc033qn4j330" path="res://assets/2D Resources/fonts/PixelOperator8.ttf" id="3_wnmds"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1gkp"]
+atlas = ExtResource("2_wnmds")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h56em"]
+atlas = ExtResource("2_wnmds")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wit4x"]
+atlas = ExtResource("2_wnmds")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yffrm"]
+atlas = ExtResource("2_wnmds")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wyhd7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1gkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h56em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wit4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yffrm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wnmds"]
+font = ExtResource("3_wnmds")
+font_size = 12
+font_color = Color(0.5833335, 0, 1, 1)
+
+[node name="DemoMap" type="Node2D" unique_id=870334134]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=514298491]
+position = Vector2(36.000004, 75)
+scale = Vector2(6.2734375, 0.37500024)
+texture = ExtResource("1_rj4tu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693903109]
+sprite_frames = SubResource("SpriteFrames_wyhd7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2105550407]
+zoom = Vector2(4, 4)
+
+[node name="Label" type="Label" parent="." unique_id=109486675]
+offset_left = -167.0
+offset_top = -74.0
+offset_right = 173.0
+offset_bottom = -18.0
+text = "Alan James Richardson Soto Canalizo"
+label_settings = SubResource("LabelSettings_wnmds")
