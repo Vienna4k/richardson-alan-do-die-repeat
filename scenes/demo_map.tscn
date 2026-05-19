@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7qcq1de4v2g5"]
 
-[ext_resource type="Texture2D" uid="uid://buo8ba70qwwcn" path="res://scenes/icon.svg" id="1_rj4tu"]
+[ext_resource type="Texture2D" uid="uid://buo8ba70qwwcn" path="res://icon.svg" id="1_rj4tu"]
 [ext_resource type="Texture2D" uid="uid://b1yl681qa4sb3" path="res://assets/2D Resources/characters/DinoSprites - doux.png" id="2_wnmds"]
 [ext_resource type="FontFile" uid="uid://dtc033qn4j330" path="res://assets/2D Resources/fonts/PixelOperator8.ttf" id="3_wnmds"]
 

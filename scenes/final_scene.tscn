@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://5uu1luurx8i3"]
+
+[ext_resource type="PackedScene" uid="uid://cpd2tc5r0o6ny" path="res://prefabs/player.tscn" id="1_4bkdv"]
+[ext_resource type="PackedScene" uid="uid://cwuswyjjp5ich" path="res://prefabs/platform.tscn" id="2_qifxa"]
+
+[node name="FinalScene" type="Node2D" unique_id=1139977177]
+
+[node name="Player" parent="." unique_id=17736098 instance=ExtResource("1_4bkdv")]
+position = Vector2(17, -28)
+
+[node name="Platform" parent="." unique_id=468525656 instance=ExtResource("2_qifxa")]
+position = Vector2(23, 19)
