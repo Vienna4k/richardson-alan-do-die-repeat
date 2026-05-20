@@ -1,81 +1,18 @@
 [gd_scene format=3 uid="uid://7qcq1de4v2g5"]
 
-[ext_resource type="Texture2D" uid="uid://buo8ba70qwwcn" path="res://scenes/icon.svg" id="1_rj4tu"]
-[ext_resource type="Texture2D" uid="uid://b1yl681qa4sb3" path="res://assets/2D Resources/characters/DinoSprites - doux.png" id="2_wnmds"]
+[ext_resource type="Texture2D" uid="uid://buo8ba70qwwcn" path="res://assets/icon.svg" id="1_rj4tu"]
+[ext_resource type="PackedScene" uid="uid://cpd2tc5r0o6ny" path="res://prefabs/player.tscn" id="2_rj4tu"]
 [ext_resource type="FontFile" uid="uid://dtc033qn4j330" path="res://assets/2D Resources/fonts/PixelOperator8.ttf" id="3_wnmds"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1gkp"]
-atlas = ExtResource("2_wnmds")
-region = Rect2(0, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h56em"]
-atlas = ExtResource("2_wnmds")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wit4x"]
-atlas = ExtResource("2_wnmds")
-region = Rect2(48, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yffrm"]
-atlas = ExtResource("2_wnmds")
-region = Rect2(72, 0, 24, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wyhd7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k1gkp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h56em")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wit4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yffrm")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wnmds"]
 font = ExtResource("3_wnmds")
 font_size = 8
 font_color = Color(0.5833335, 0, 1, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnmds"]
+size = Vector2(670, 20)
+
 [node name="DemoMap" type="Node2D" unique_id=870334134]
-
-[node name="Icon" type="Sprite2D" parent="." unique_id=514298491]
-position = Vector2(36.000004, 75)
-scale = Vector2(6.2734375, 0.37500024)
-texture = ExtResource("1_rj4tu")
-
-[node name="Icon2" type="Sprite2D" parent="." unique_id=1859147652]
-position = Vector2(16.000006, -117)
-scale = Vector2(6.2734375, 0.37500024)
-texture = ExtResource("1_rj4tu")
-
-[node name="Icon3" type="Sprite2D" parent="." unique_id=293016030]
-position = Vector2(-181, -10)
-rotation = 1.5596361
-scale = Vector2(6.2734375, 0.37500024)
-texture = ExtResource("1_rj4tu")
-
-[node name="Icon4" type="Sprite2D" parent="." unique_id=1092429972]
-position = Vector2(170, -17)
-rotation = 1.5596361
-scale = Vector2(6.2734375, 0.37500024)
-texture = ExtResource("1_rj4tu")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693903109]
-sprite_frames = SubResource("SpriteFrames_wyhd7")
-animation = &"idle"
-autoplay = "idle"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2105550407]
-zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=109486675]
 offset_left = -113.0
@@ -84,3 +21,17 @@ offset_right = 113.0
 offset_bottom = -27.0
 text = "Alan James Richardson Soto Canalizo"
 label_settings = SubResource("LabelSettings_wnmds")
+
+[node name="Player" parent="." unique_id=2010396611 instance=ExtResource("2_rj4tu")]
+position = Vector2(-2, -39)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1163701214]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1492133192]
+position = Vector2(-1.00002, -0.5000019)
+scale = Vector2(5.2343745, 0.16406249)
+texture = ExtResource("1_rj4tu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1189680840]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_wnmds")
