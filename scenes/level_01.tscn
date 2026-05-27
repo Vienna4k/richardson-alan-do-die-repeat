@@ -5,7 +5,47 @@
 [ext_resource type="PackedScene" uid="uid://cpd2tc5r0o6ny" path="res://prefabs/player.tscn" id="2_mofoo"]
 [ext_resource type="Texture2D" uid="uid://dhrxxes4fjdj4" path="res://assets/2D Resources/tilesets/props.png" id="2_nr3cb"]
 [ext_resource type="Texture2D" uid="uid://dsc7fbhbbpbu3" path="res://assets/2D Resources/tilesets/middle.png" id="2_qgxqk"]
+[ext_resource type="Script" uid="uid://c807kf4wl8x4q" path="res://scripts/kill_floor.gd" id="6_1b6n0"]
 [ext_resource type="PackedScene" uid="uid://dsefqh2f5o8jp" path="res://moving_platform.tscn" id="6_qgxqk"]
+[ext_resource type="PackedScene" uid="uid://cl08tpkvwnow7" path="res://prefabs/coin.tscn" id="7_t0ybu"]
+
+[sub_resource type="Animation" id="Animation_t0ybu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1536, 72)]
+}
+
+[sub_resource type="Animation" id="Animation_1b6n0"]
+resource_name = "move_plat"
+length = 4.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.06666666, 0.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1424, 72), Vector2(1424, 72), Vector2(1536, 72), Vector2(1536, 72)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_llcge"]
+_data = {
+&"RESET": SubResource("Animation_t0ybu"),
+&"move_plat": SubResource("Animation_1b6n0")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j60wy"]
 texture = ExtResource("1_4lj41")
@@ -561,43 +601,8 @@ texture = ExtResource("2_nr3cb")
 [sub_resource type="TileSet" id="TileSet_nr3cb"]
 sources/0 = SubResource("TileSetAtlasSource_mofoo")
 
-[sub_resource type="Animation" id="Animation_t0ybu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1536, 72)]
-}
-
-[sub_resource type="Animation" id="Animation_1b6n0"]
-resource_name = "move_plat"
-length = 4.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.06666666, 0.5, 3.5, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1424, 72), Vector2(1424, 72), Vector2(1536, 72), Vector2(1536, 72)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_llcge"]
-_data = {
-&"RESET": SubResource("Animation_t0ybu"),
-&"move_plat": SubResource("Animation_1b6n0")
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1b6n0"]
+size = Vector2(2369.5, 125.5)
 
 [node name="Level01" type="Node2D" unique_id=1146306019]
 
@@ -693,6 +698,16 @@ texture = ExtResource("2_qgxqk")
 
 [node name="Tilesets" type="Node" parent="." unique_id=1793571058]
 
+[node name="MovingPlatform" parent="Tilesets" unique_id=1913528888 instance=ExtResource("6_qgxqk")]
+position = Vector2(1536, 72)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tilesets/MovingPlatform" unique_id=1197323855]
+libraries/ = SubResource("AnimationLibrary_llcge")
+autoplay = &"move_plat"
+
+[node name="Coin15" parent="Tilesets/MovingPlatform" unique_id=457466331 instance=ExtResource("7_t0ybu")]
+position = Vector2(-2, -18)
+
 [node name="Background" type="TileMapLayer" parent="Tilesets" unique_id=165739979]
 tile_map_data = PackedByteArray("AAAOAAAAAQAHAAIAAAAaAP//AQAHAAIAAAAlAPz/AQAHAAIAAABWAAMAAQAHAAIAAABjAAMAAQAHAAIAAAA5APn/AQATAAEAAAAKAAAAAAABAAcAAAAPAAAAAAABAAcAAAALAAAAAAABAAcAAAAUAP//AAABAAcAAAAVAP//AAABAAcAAAAhAP7/AAABAAcAAAAiAP3/AAABAAcAAAArAP7/AAABAAcAAAAqAP7/AAABAAcAAABRAAMAAAABAAcAAABSAAMAAAABAAcAAABTAAMAAAABAAcAAABpAAMAAAABAAcAAABvAAIAAAABAAcAAABuAAMAAAABAAcAAABzAAEAAAABAAcAAAB1AAEAAAABAAcAAAB0AAEAAAADAAcAAAB5AAAAAAABAAcAAAB6AAAAAAABAAcAAACGAP//AAADAAcAAACFAP//AAADAAcAAACEAP//AAADAAcAAABUAAMAAAADAAcAAAA7APn/AAADAAcAAAA=")
 tile_set = SubResource("TileSet_t0ybu")
@@ -704,6 +719,16 @@ tile_set = SubResource("TileSet_j60wy")
 [node name="Foreground" type="TileMapLayer" parent="Tilesets" unique_id=1965960211]
 tile_map_data = PackedByteArray("AAANAAAAAAAGAAcAAAAXAP//AAAGAAcAAAAbAP//AAAGAAcAAAA3APn/AAAGAAcAAABWAAMAAAAGAAcAAABkAAMAAAAGAAcAAAA=")
 tile_set = SubResource("TileSet_nr3cb")
+
+[node name="Kill Floor" type="Area2D" parent="Tilesets" unique_id=1507409920]
+script = ExtResource("6_1b6n0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tilesets/Kill Floor" unique_id=1387954097]
+position = Vector2(1197, 246)
+shape = SubResource("RectangleShape2D_1b6n0")
+
+[node name="Coin" parent="Tilesets/Kill Floor" unique_id=74946845 instance=ExtResource("7_t0ybu")]
+position = Vector2(886, -104)
 
 [node name="Player" parent="Tilesets" unique_id=2010396611 instance=ExtResource("2_mofoo")]
 position = Vector2(113, -12)
@@ -718,9 +743,90 @@ limit_bottom = 224
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 
-[node name="MovingPlatform" parent="Tilesets" unique_id=1913528888 instance=ExtResource("6_qgxqk")]
-position = Vector2(1536, 72)
+[node name="Collectables" type="Node" parent="." unique_id=378726645]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tilesets/MovingPlatform" unique_id=1197323855]
-libraries/ = SubResource("AnimationLibrary_llcge")
-autoplay = &"move_plat"
+[node name="Coin" parent="Collectables" unique_id=355017650 instance=ExtResource("7_t0ybu")]
+position = Vector2(201, -1)
+
+[node name="Coin26" parent="Collectables" unique_id=751777372 instance=ExtResource("7_t0ybu")]
+position = Vector2(2199, -17)
+
+[node name="Coin2" parent="Collectables" unique_id=1838796159 instance=ExtResource("7_t0ybu")]
+position = Vector2(273, -2)
+
+[node name="Coin3" parent="Collectables" unique_id=1929460116 instance=ExtResource("7_t0ybu")]
+position = Vector2(335, -15)
+
+[node name="Coin4" parent="Collectables" unique_id=1358318257 instance=ExtResource("7_t0ybu")]
+position = Vector2(904, -104)
+
+[node name="Coin5" parent="Collectables" unique_id=1935385736 instance=ExtResource("7_t0ybu")]
+position = Vector2(931, -104)
+
+[node name="Coin6" parent="Collectables" unique_id=2121503584 instance=ExtResource("7_t0ybu")]
+position = Vector2(948, -104)
+
+[node name="Coin7" parent="Collectables" unique_id=828705138 instance=ExtResource("7_t0ybu")]
+position = Vector2(983, -103)
+
+[node name="Coin8" parent="Collectables" unique_id=641674496 instance=ExtResource("7_t0ybu")]
+position = Vector2(1017, -86)
+
+[node name="Coin9" parent="Collectables" unique_id=453499560 instance=ExtResource("7_t0ybu")]
+position = Vector2(1068, -62)
+
+[node name="Coin10" parent="Collectables" unique_id=879077462 instance=ExtResource("7_t0ybu")]
+position = Vector2(1128, -30)
+
+[node name="Coin11" parent="Collectables" unique_id=1095071546 instance=ExtResource("7_t0ybu")]
+position = Vector2(1193, 1)
+
+[node name="Coin12" parent="Collectables" unique_id=1637335138 instance=ExtResource("7_t0ybu")]
+position = Vector2(1252, 31)
+
+[node name="Coin13" parent="Collectables" unique_id=795394411 instance=ExtResource("7_t0ybu")]
+position = Vector2(1302, 49)
+
+[node name="Coin14" parent="Collectables" unique_id=2027174083 instance=ExtResource("7_t0ybu")]
+position = Vector2(1352, 52)
+
+[node name="Coin15" parent="Collectables" unique_id=963309329 instance=ExtResource("7_t0ybu")]
+position = Vector2(1581, 53)
+
+[node name="Coin16" parent="Collectables" unique_id=1973510432 instance=ExtResource("7_t0ybu")]
+position = Vector2(1629, 54)
+
+[node name="Coin17" parent="Collectables" unique_id=811738314 instance=ExtResource("7_t0ybu")]
+position = Vector2(1664, 53)
+
+[node name="Coin18" parent="Collectables" unique_id=300340744 instance=ExtResource("7_t0ybu")]
+position = Vector2(1721, 53)
+
+[node name="Coin19" parent="Collectables" unique_id=982799139 instance=ExtResource("7_t0ybu")]
+position = Vector2(1812, 21)
+
+[node name="Coin20" parent="Collectables" unique_id=1942037526 instance=ExtResource("7_t0ybu")]
+position = Vector2(1840, 22)
+
+[node name="Coin21" parent="Collectables" unique_id=1916021023 instance=ExtResource("7_t0ybu")]
+position = Vector2(1920, 3)
+
+[node name="Coin22" parent="Collectables" unique_id=1663870362 instance=ExtResource("7_t0ybu")]
+position = Vector2(1962, 3)
+
+[node name="Coin23" parent="Collectables" unique_id=717772940 instance=ExtResource("7_t0ybu")]
+position = Vector2(2041, -12)
+
+[node name="Coin24" parent="Collectables" unique_id=1530349096 instance=ExtResource("7_t0ybu")]
+position = Vector2(2085, -14)
+
+[node name="Coin25" parent="Collectables" unique_id=1990455726 instance=ExtResource("7_t0ybu")]
+position = Vector2(2133, -15)
+
+[node name="Coin27" parent="Collectables" unique_id=319669348 instance=ExtResource("7_t0ybu")]
+position = Vector2(2267, -15)
+
+[node name="Coin28" parent="Collectables" unique_id=1070446213 instance=ExtResource("7_t0ybu")]
+position = Vector2(2331, -14)
+
+[connection signal="body_entered" from="Tilesets/Kill Floor" to="Tilesets/Kill Floor" method="_on_body_entered"]

@@ -1,8 +1,12 @@
+class_name Player
+
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
+
+var COLLECTED_COINS : int = 0 #how to make public so i can acces in another script
 
 
 
@@ -25,3 +29,5 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+	print(COLLECTED_COINS)
