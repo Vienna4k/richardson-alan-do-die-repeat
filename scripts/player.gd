@@ -3,10 +3,10 @@ class_name Player
 extends CharacterBody2D
 
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
+@export var SPEED: float = 200.0
+@export var JUMP_VELOCITY: float = -300.0
 
-var COLLECTED_COINS : int = 0 #how to make public so i can acces in another script
+var COLLECTED_COINS : int = 0
 
 
 
