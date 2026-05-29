@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var SPEED: float = 200.0
 @export var JUMP_VELOCITY: float = -300.0
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 var COLLECTED_COINS : int = 0
 
 
@@ -28,6 +30,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide()
+	# Flip the sprite depending on direction
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
 
-	print(COLLECTED_COINS)
+	move_and_slide()
