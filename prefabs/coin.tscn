@@ -99,6 +99,7 @@ animations = [{
 }]
 
 [node name="Coin" type="Area2D" unique_id=457466331 groups=["coins"]]
+collision_mask = 4
 script = ExtResource("1_h1t07")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=814279787]
@@ -111,4 +112,10 @@ animation = &"Coin"
 autoplay = "Coin"
 frame_progress = 0.2909727
 
+[node name="SpeedBuff" type="Timer" parent="." unique_id=2043059716]
+wait_time = 2.0
+one_shot = true
+ignore_time_scale = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SpeedBuff" to="." method="_on_speed_buff_timeout"]

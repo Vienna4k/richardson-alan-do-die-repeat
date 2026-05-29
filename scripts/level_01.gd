@@ -11,7 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if all_coins.is_empty():
 		print("Good Job!")
-		set_process(false) # Let's disable _process here so it doesn't spam the print statement every frame
+		#set_process(false) # Let's disable _process here so it doesn't spam the print statement every frame
 
 func _on_coin_collected(coin: Node2D) -> void:
 	if coin in all_coins:
