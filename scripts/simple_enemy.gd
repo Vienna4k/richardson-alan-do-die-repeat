@@ -1,3 +1,5 @@
+class_name simple_enemy
+
 extends Node2D
 
 @export var speed : float = 10
@@ -22,3 +24,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		position.x += speed * delta
 	
+func stomp() -> void:
+	#future stomp anim
+
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+
+	queue_free()

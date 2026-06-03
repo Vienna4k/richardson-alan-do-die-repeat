@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://p5v61mtd5ymm"]
+
+[ext_resource type="Script" uid="uid://c0f07v4ckcfbm" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://cube1vy3vxjdr" path="res://assets/2D Resources/tilesets/back.png" id="2_wu84c"]
+[ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="3_8ln24"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j6a7c"]
+font = ExtResource("3_8ln24")
+font_size = 64
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=1816350357]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqqt6")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1226438110]
+layout_mode = 0
+offset_left = -618.0
+offset_top = -92.0
+offset_right = 2623.0
+offset_bottom = 1526.0
+texture = ExtResource("2_wu84c")
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1221271021]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = 156.0
+offset_right = 357.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 42
+
+[node name="Title" type="Label" parent="MenuContainer" unique_id=1307512303]
+layout_mode = 2
+text = "DO DIE REPEAT"
+label_settings = SubResource("LabelSettings_j6a7c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="MenuContainer" unique_id=909059429]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 100
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="MenuContainer" unique_id=1213592304]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 100
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MenuContainer" unique_id=577839883]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+
+[connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

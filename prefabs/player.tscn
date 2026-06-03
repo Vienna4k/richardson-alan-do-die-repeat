@@ -90,6 +90,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dohe"]
+size = Vector2(13, 3.25)
+
 [node name="Player" type="CharacterBody2D" unique_id=2010396611 groups=["players"]]
 script = ExtResource("1_4dohe")
 
@@ -102,3 +105,13 @@ sprite_frames = SubResource("SpriteFrames_m2qjg")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.6321651
+
+[node name="StompDetector" type="Area2D" parent="." unique_id=1341987118]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" unique_id=305031581]
+position = Vector2(0, 11.625)
+shape = SubResource("RectangleShape2D_4dohe")
+
+[connection signal="area_entered" from="StompDetector" to="." method="_on_stomp_detector_area_entered"]

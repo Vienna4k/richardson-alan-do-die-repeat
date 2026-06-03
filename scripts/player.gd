@@ -5,11 +5,11 @@ extends CharacterBody2D
 
 @export var speed: float = 200.0
 @export var jump_velocity: float = -300.0
+@export var bounce_force : float = -100.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var COLLECTED_COINS : int = 0
-
 
 
 
@@ -39,3 +39,14 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 
 	move_and_slide()
+
+
+func _on_stomp_detector_area_entered(area: Area2D) -> void:
+	#var enemy : simple_enemy
+	
+	if velocity.y > 0:
+		velocity.y = bounce_force
+
+		if area.owner.has_method("stomp"):
+			pass
+			#area.owner.stomp()
