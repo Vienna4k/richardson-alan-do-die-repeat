@@ -1,14 +1,11 @@
 class_name GameManager
 extends Node
-
-var all_coins : Array = []
 var score : int = 0
 
 @onready var coin_count: Label = %"CoinCount"
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	all_coins = get_tree().get_nodes_in_group("coins")
+@onready var winSFX : AudioStreamPlayer2D
+@export var win_label : Label
+@onready var win_music : AudioStreamPlayer = $WinMusic
 
 func add_points(amount : int) -> void:
 	score += amount
@@ -16,10 +13,17 @@ func add_points(amount : int) -> void:
 
 
 func _process(delta: float) -> void:
-	if all_coins.is_empty():
-		print("Good Job!")
-		#set_process(false) # Let's disable _process here so it doesn't spam the print statement every frame
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
-func _on_coin_collected(coin: Node2D) -> void:
-	if coin in all_coins:
-		all_coins.erase(coin)
+
+func _on_finish_line_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		print("Good Job!")
+		win_label.show()
+		win_music.play()
+		Engine.time_scale = 0
+
+		await win_music.finished
+		Engine.time_scale = 1
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

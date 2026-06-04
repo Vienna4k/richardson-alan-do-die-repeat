@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgmc510ftqbi4" path="res://scripts/player.gd" id="1_4dohe"]
 [ext_resource type="Texture2D" uid="uid://b1yl681qa4sb3" path="res://assets/2D Resources/characters/DinoSprites - doux.png" id="1_72ieh"]
+[ext_resource type="AudioStream" uid="uid://bh0o00r286g4m" path="res://assets/2D Resources/sounds/Stomp.mp3" id="3_r66lb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4dohe"]
 radius = 7.0
@@ -113,5 +114,9 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" unique_id=305031581]
 position = Vector2(0, 11.625)
 shape = SubResource("RectangleShape2D_4dohe")
+
+[node name="StompSFX" type="AudioStreamPlayer" parent="." unique_id=1731477332]
+unique_name_in_owner = true
+stream = ExtResource("3_r66lb")
 
 [connection signal="area_entered" from="StompDetector" to="." method="_on_stomp_detector_area_entered"]

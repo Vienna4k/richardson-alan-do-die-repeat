@@ -8,6 +8,9 @@ extends CharacterBody2D
 @export var bounce_force : float = -100.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var stomp_sfx : AudioStreamPlayer = $StompSFX
+@onready var win_music : AudioStreamPlayer = $WinMusic
+
 
 var COLLECTED_COINS : int = 0
 
@@ -42,11 +45,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_stomp_detector_area_entered(area: Area2D) -> void:
-	#var enemy : simple_enemy
 	
 	if velocity.y > 0:
 		velocity.y = bounce_force
 
 		if area.owner.has_method("stomp"):
-			pass
-			#area.owner.stomp()
+			area.owner.call("stomp")
+	
+	stomp_sfx.play()

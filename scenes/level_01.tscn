@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cgbdytmdd3l3h" path="res://assets/2D Resources/tilesets/tileset.png" id="1_4lj41"]
 [ext_resource type="Texture2D" uid="uid://cube1vy3vxjdr" path="res://assets/2D Resources/tilesets/back.png" id="1_j60wy"]
 [ext_resource type="Script" uid="uid://w28f2vmjvckk" path="res://scripts/game_manager.gd" id="1_llcge"]
+[ext_resource type="AudioStream" uid="uid://nn3ksbicrf1c" path="res://assets/2D Resources/sounds/Win.mp3" id="2_2ucnx"]
 [ext_resource type="PackedScene" uid="uid://cpd2tc5r0o6ny" path="res://prefabs/player.tscn" id="2_mofoo"]
 [ext_resource type="Texture2D" uid="uid://dhrxxes4fjdj4" path="res://assets/2D Resources/tilesets/props.png" id="2_nr3cb"]
 [ext_resource type="Texture2D" uid="uid://dsc7fbhbbpbu3" path="res://assets/2D Resources/tilesets/middle.png" id="2_qgxqk"]
@@ -11,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://cl08tpkvwnow7" path="res://prefabs/coin.tscn" id="7_t0ybu"]
 [ext_resource type="PackedScene" uid="uid://ix4orxpv2lf1" path="res://prefabs/green_slime_enemy.tscn" id="8_lwi15"]
 [ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="11_e6mo4"]
+[ext_resource type="PackedScene" uid="uid://jljrm4plnkfm" path="res://prefabs/finish_line.tscn" id="12_px6rj"]
+[ext_resource type="PackedScene" uid="uid://b6vamoo0k0t33" path="res://prefabs/big_coin.tscn" id="14_cr2eh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lwi15"]
 font = ExtResource("11_e6mo4")
@@ -660,9 +663,15 @@ distance = -54.0
 
 [node name="Level01" type="Node2D" unique_id=1146306019]
 
-[node name="GameManager" type="Node" parent="." unique_id=1247795750]
+[node name="GameManager" type="Node" parent="." unique_id=1247795750 node_paths=PackedStringArray("win_label")]
 unique_name_in_owner = true
 script = ExtResource("1_llcge")
+win_label = NodePath("../CanvasLayer/Control/WinLabel")
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="GameManager" unique_id=178692838]
+unique_name_in_owner = true
+stream = ExtResource("2_2ucnx")
+bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=77509366]
 
@@ -673,6 +682,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="WinLabel" type="Label" parent="CanvasLayer/Control" unique_id=859410800]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -30.5
+offset_right = 259.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN!!!"
+label_settings = SubResource("LabelSettings_lwi15")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control" unique_id=19848487]
 layout_mode = 1
@@ -779,7 +807,7 @@ texture = ExtResource("2_qgxqk")
 
 [node name="Middle9" type="Sprite2D" parent="BG" unique_id=649524493]
 z_index = -5
-position = Vector2(1576, 96)
+position = Vector2(1558, 120)
 texture = ExtResource("2_qgxqk")
 
 [node name="Middle10" type="Sprite2D" parent="BG" unique_id=693554785]
@@ -945,7 +973,7 @@ position = Vector2(2331, -14)
 
 [node name="Background" type="TileMapLayer" parent="Tilesets" unique_id=165739979]
 z_index = -4
-tile_map_data = PackedByteArray("AAAOAAAAAQAHAAIAAAAaAP//AQAHAAIAAAAlAPz/AQAHAAIAAABWAAMAAQAHAAIAAABjAAMAAQAHAAIAAAA5APn/AQATAAEAAAAKAAAAAAABAAcAAAAPAAAAAAABAAcAAAALAAAAAAABAAcAAAAUAP//AAABAAcAAAAVAP//AAABAAcAAAAhAP7/AAABAAcAAAAiAP3/AAABAAcAAAArAP7/AAABAAcAAAAqAP7/AAABAAcAAABRAAMAAAABAAcAAABSAAMAAAABAAcAAABTAAMAAAABAAcAAABpAAMAAAABAAcAAABvAAIAAAABAAcAAABuAAMAAAABAAcAAABzAAEAAAABAAcAAAB1AAEAAAABAAcAAAB0AAEAAAADAAcAAAB5AAAAAAABAAcAAAB6AAAAAAABAAcAAACGAP//AAADAAcAAACFAP//AAADAAcAAACEAP//AAADAAcAAABUAAMAAAADAAcAAAA7APn/AAADAAcAAAA=")
+tile_map_data = PackedByteArray("AAAOAAAAAQAHAAIAAAAlAPz/AQAHAAIAAABjAAMAAQAHAAIAAAA5APn/AQATAAEAAAAKAAAAAAABAAcAAAAPAAAAAAABAAcAAAALAAAAAAABAAcAAAAUAP//AAABAAcAAAAVAP//AAABAAcAAAAhAP7/AAABAAcAAAAiAP3/AAABAAcAAAArAP7/AAABAAcAAAAqAP7/AAABAAcAAABRAAMAAAABAAcAAABSAAMAAAABAAcAAABTAAMAAAABAAcAAABpAAMAAAABAAcAAABvAAIAAAABAAcAAABuAAMAAAABAAcAAABzAAEAAAABAAcAAAB1AAEAAAABAAcAAAB0AAEAAAADAAcAAAB5AAAAAAABAAcAAAB6AAAAAAABAAcAAABUAAMAAAADAAcAAAA7APn/AAADAAcAAACQAP//AQAPAAYAAAB/AP//AQAHAAIAAACpAAEAAQAHAAIAAACyAAEAAQAPAAYAAACTAP//AAABAAcAAACUAP//AAABAAcAAACuAAEAAAABAAcAAAChAAEAAAABAAcAAACEAAAAAAABAAcAAACFAAAAAAADAAcAAACDAAAAAAADAAcAAAB4AAAAAAADAAcAAACgAAEAAAADAAcAAACoAAEAAAADAAcAAAA=")
 tile_set = SubResource("TileSet_t0ybu")
 
 [node name="Midground" type="TileMapLayer" parent="Tilesets" unique_id=705989944]
@@ -960,6 +988,53 @@ tile_set = SubResource("TileSet_nr3cb")
 
 [node name="GreenSlimeEnemy" parent="Tilesets" unique_id=818680934 instance=ExtResource("8_lwi15")]
 position = Vector2(2239, 8)
+speed = 12.0
+
+[node name="GreenSlimeEnemy2" parent="Tilesets" unique_id=1989182843 instance=ExtResource("8_lwi15")]
+position = Vector2(2174, 8)
+speed = 5.0
+
+[node name="GreenSlimeEnemy3" parent="Tilesets" unique_id=2074300636 instance=ExtResource("8_lwi15")]
+position = Vector2(2134, 8)
+
+[node name="GreenSlimeEnemy4" parent="Tilesets" unique_id=806749369 instance=ExtResource("8_lwi15")]
+position = Vector2(2209, 8)
+speed = 14.0
+
+[node name="GreenSlimeEnemy5" parent="Tilesets" unique_id=1442706880 instance=ExtResource("8_lwi15")]
+position = Vector2(2088, 8)
+speed = 20.0
+
+[node name="GreenSlimeEnemy6" parent="Tilesets" unique_id=163511448 instance=ExtResource("8_lwi15")]
+position = Vector2(2088, 8)
+speed = 11.0
+
+[node name="GreenSlimeEnemy7" parent="Tilesets" unique_id=156226776 instance=ExtResource("8_lwi15")]
+position = Vector2(2088, 8)
+
+[node name="GreenSlimeEnemy8" parent="Tilesets" unique_id=678113381 instance=ExtResource("8_lwi15")]
+position = Vector2(2098, 7)
+speed = 3.0
+
+[node name="GreenSlimeEnemy9" parent="Tilesets" unique_id=1663020234 instance=ExtResource("8_lwi15")]
+position = Vector2(2109, 8)
+speed = 21.0
+
+[node name="GreenSlimeEnemy10" parent="Tilesets" unique_id=2133700925 instance=ExtResource("8_lwi15")]
+position = Vector2(2109, 8)
+speed = 8.0
+
+[node name="GreenSlimeEnemy11" parent="Tilesets" unique_id=498227811 instance=ExtResource("8_lwi15")]
+position = Vector2(2192, 8)
+speed = 5.4
+
+[node name="GreenSlimeEnemy12" parent="Tilesets" unique_id=1174502362 instance=ExtResource("8_lwi15")]
+position = Vector2(2262, 8)
+speed = 7.82
+
+[node name="GreenSlimeEnemy13" parent="Tilesets" unique_id=992245661 instance=ExtResource("8_lwi15")]
+position = Vector2(2262, 8)
+speed = 8.775
 
 [node name="Coin" parent="Tilesets" unique_id=1681846815 instance=ExtResource("7_t0ybu")]
 position = Vector2(2632, 22)
@@ -972,12 +1047,6 @@ position = Vector2(2827, 18)
 
 [node name="Coin4" parent="Tilesets" unique_id=2041168190 instance=ExtResource("7_t0ybu")]
 position = Vector2(2901, 2)
-
-[node name="Coin5" parent="Tilesets" unique_id=343805584 instance=ExtResource("7_t0ybu")]
-position = Vector2(2955, -14)
-
-[node name="Coin6" parent="Tilesets" unique_id=776448434 instance=ExtResource("7_t0ybu")]
-position = Vector2(3016, -11)
 
 [node name="Coin7" parent="Tilesets" unique_id=1053015858 instance=ExtResource("7_t0ybu")]
 position = Vector2(2643, 22)
@@ -1012,8 +1081,13 @@ position = Vector2(2654, 0)
 [node name="Coin17" parent="Tilesets" unique_id=1247053547 instance=ExtResource("7_t0ybu")]
 position = Vector2(2665, 0)
 
+[node name="FinishLine" parent="." unique_id=799834444 instance=ExtResource("12_px6rj")]
+position = Vector2(3067, -34)
+collision_layer = 4
+collision_mask = 4
+
 [node name="Player" parent="." unique_id=2010396611 instance=ExtResource("2_mofoo")]
-position = Vector2(51, -32)
+position = Vector2(91, -591)
 collision_layer = 4
 floor_constant_speed = true
 
@@ -1033,3 +1107,8 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1324610874]
 shape = SubResource("WorldBoundaryShape2D_llcge")
+
+[node name="BigCoin" parent="." unique_id=1297981878 instance=ExtResource("14_cr2eh")]
+position = Vector2(2565, 12)
+
+[connection signal="body_entered" from="FinishLine" to="GameManager" method="_on_finish_line_body_entered"]

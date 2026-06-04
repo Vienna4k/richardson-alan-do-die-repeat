@@ -7,4 +7,5 @@
 [node name="TimeForAdventure" type="AudioStreamPlayer" parent="." unique_id=920521107]
 stream = ExtResource("1_q5y64")
 autoplay = true
+bus = &"Music"
 parameters/looping = true

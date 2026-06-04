@@ -27,7 +27,12 @@ func _physics_process(delta: float) -> void:
 func stomp() -> void:
 	#future stomp anim
 
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+	if has_node("KillBox/CollisionShape2D"):
+		$KillBox/CollisionShape2D.set_deferred("disabled", true)
+	elif has_node("CollisionShape2D"):
+		$CollisionShape2D.set_deferred("disabled", true)
+		
+	if has_node("Hitbox/CollisionShape2D"):
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 	queue_free()
