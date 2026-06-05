@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://cl08tpkvwnow7" path="res://prefabs/coin.tscn" id="7_t0ybu"]
 [ext_resource type="PackedScene" uid="uid://ix4orxpv2lf1" path="res://prefabs/green_slime_enemy.tscn" id="8_lwi15"]
 [ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="11_e6mo4"]
-[ext_resource type="PackedScene" uid="uid://jljrm4plnkfm" path="res://prefabs/finish_line.tscn" id="12_px6rj"]
-[ext_resource type="PackedScene" uid="uid://b6vamoo0k0t33" path="res://prefabs/big_coin.tscn" id="14_cr2eh"]
+[ext_resource type="PackedScene" path="res://prefabs/finish_line.tscn" id="12_px6rj"]
+[ext_resource type="PackedScene" path="res://prefabs/big_coin.tscn" id="14_cr2eh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lwi15"]
 font = ExtResource("11_e6mo4")

@@ -65,7 +65,7 @@ animations = [{
 size = Vector2(10, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ich2n"]
-size = Vector2(10, 3.5)
+size = Vector2(16, 3.5)
 
 [node name="GreenSlimeEnemy" type="Node2D" unique_id=818680934]
 script = ExtResource("1_b88i6")
@@ -95,5 +95,5 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=300954033]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_ich2n")
