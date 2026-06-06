@@ -1,36 +1,55 @@
+class_name Player
+
 extends CharacterBody2D
 
-const MAX_SPEED = 250.0
-const JUMP_VELOCITY = -400.0
-const ACCELERATION = 200.0
-const FRICTION = 200.0
+
+@export var speed: float = 200.0
+@export var jump_velocity: float = -300.0
+@export var bounce_force : float = -100.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var stomp_sfx : AudioStreamPlayer = $StompSFX
+@onready var win_music : AudioStreamPlayer = $WinMusic
+
+
+var COLLECTED_COINS : int = 0
+
+
 
 func _physics_process(delta: float) -> void:
-	
-	# Add gravity.
+	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		var unpredictable_jump = randf_range(0.7, 1.3)
-		velocity.y = JUMP_VELOCITY * unpredictable_jump
-		animated_sprite.play("jump")
+	# Handle jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
 
-	# Get input direction
-	var direction := Input.get_axis("ui_left", "ui_right")
-	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis("left", "right")
 	if direction:
-		var target_speed = direction * MAX_SPEED
-		velocity.x = move_toward(velocity.x, target_speed, ACCELERATION * delta)
-		
+		velocity.x = direction * speed
 		animated_sprite.play("walk")
-		animated_sprite.flip_h = direction < 0
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
-		
-		# Only play idle if we are somewhat stable
+		velocity.x = move_toward(velocity.x, 0, speed)
 		animated_sprite.play("idle")
 
+	# Flip the sprite depending on direction
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
+
 	move_and_slide()
+
+
+func _on_stomp_detector_area_entered(area: Area2D) -> void:
+	
+	if velocity.y > 0:
+		velocity.y = bounce_force
+
+		if area.owner.has_method("stomp"):
+			area.owner.call("stomp")
+	
+	stomp_sfx.play()

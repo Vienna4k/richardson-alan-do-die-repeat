@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://jljrm4plnkfm"]
+
+[ext_resource type="Texture2D" uid="uid://ctmk1at0ir0wa" path="res://assets/Finish_Line.svg" id="1_eldoa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dadni"]
+size = Vector2(159, 86)
+
+[node name="FinishLine" type="Area2D" unique_id=799834444]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1349178437]
+position = Vector2(0.5, -7)
+shape = SubResource("RectangleShape2D_dadni")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=272086272]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_eldoa")
