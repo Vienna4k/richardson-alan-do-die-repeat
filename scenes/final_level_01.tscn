@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://do4uk2j8xbx3y"]
+
+[ext_resource type="Texture2D" uid="uid://b4woee7lomh0g" path="res://assets/2D Resources/tilesets/untitled.png" id="1_n2fyr"]
+
+[sub_resource type="TileSet" id="TileSet_gqbav"]
+
+[node name="Final-Level01" type="Node2D" unique_id=402310896]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1684772389]
+position = Vector2(344, 888)
+scale = Vector2(2, 2)
+texture = ExtResource("1_n2fyr")
+
+[node name="Middle" type="TileMapLayer" parent="." unique_id=607036014]
+tile_set = SubResource("TileSet_gqbav")
