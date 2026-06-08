@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vmsdy05jf1ob" path="res://assets/2D Resources/tilesets/Leg.png" id="2_y0734"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0734"]
-size = Vector2(32.060696, 6.299371)
+size = Vector2(2.000001, 16.000004)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0734"]
 atlas = ExtResource("1_3622m")
@@ -119,39 +119,33 @@ lock_rotation = true
 script = ExtResource("1_hdm5p")
 
 [node name="LeftLeg" type="RigidBody2D" parent="." unique_id=1152366048]
-position = Vector2(-7.999999, 13.999999)
-rotation = -0.12941647
+position = Vector2(-6, 13)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="LeftLeg" unique_id=1903634370]
-position = Vector2(-9.536743e-07, 9.536743e-07)
-rotation = -1.1597764
+[node name="Sprite2D" type="Sprite2D" parent="LeftLeg" unique_id=1188266426]
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_y0734")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="LeftLeg" unique_id=1764855115]
-position = Vector2(-4.3213367e-07, 4.246831e-07)
-rotation = -1.1597764
-scale = Vector2(0.5, 0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftLeg" unique_id=1695604963]
+position = Vector2(-9.536743e-07, 1.9073486e-06)
+scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_y0734")
 
-[node name="RightLeg" type="RigidBody2D" parent="." unique_id=1952348730]
-position = Vector2(9, 14)
-rotation = -0.8496227
+[node name="RightLeg" type="RigidBody2D" parent="." unique_id=252819289]
+position = Vector2(5.999999, 13)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="RightLeg" unique_id=54893242]
-position = Vector2(-9.536743e-07, 9.536743e-07)
-rotation = -1.1597764
+[node name="Sprite2D" type="Sprite2D" parent="RightLeg" unique_id=483353790]
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_y0734")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RightLeg" unique_id=2023380446]
-position = Vector2(-0.12922001, -0.05632019)
-rotation = -1.1597764
-scale = Vector2(0.5, 0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightLeg" unique_id=368519925]
+position = Vector2(-9.536743e-07, 1.9073486e-06)
+scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_y0734")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=489728073]
@@ -172,3 +166,6 @@ node_b = NodePath("../LeftLeg")
 position = Vector2(6, 8)
 node_a = NodePath("..")
 node_b = NodePath("../RightLeg")
+
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=585184742]
+target_position = Vector2(0, 29)
