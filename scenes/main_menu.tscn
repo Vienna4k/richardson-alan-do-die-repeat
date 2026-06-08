@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://p5v61mtd5ymm"]
 
 [ext_resource type="Script" uid="uid://c0f07v4ckcfbm" path="res://scripts/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://cube1vy3vxjdr" path="res://assets/2D Resources/tilesets/back.png" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://cube1vy3vxjdr" path="res://assets/2D Resources/tilesets/f_back.png" id="2_wu84c"]
 [ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="3_8ln24"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6a7c"]
