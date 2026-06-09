@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="RichardsonAlan_DoDieRepeat"
+run/main_scene="uid://p5v61mtd5ymm"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [audio]

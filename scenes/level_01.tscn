@@ -671,7 +671,8 @@ win_label = NodePath("../CanvasLayer/Control/WinLabel")
 [node name="WinMusic" type="AudioStreamPlayer" parent="GameManager" unique_id=178692838]
 unique_name_in_owner = true
 stream = ExtResource("2_2ucnx")
-bus = &"SFX"
+volume_db = -10.0
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=77509366]
 
@@ -969,6 +970,9 @@ position = Vector2(886, -104)
 [node name="Coin28" parent="Collectables" unique_id=1070446213 instance=ExtResource("7_t0ybu")]
 position = Vector2(2331, -14)
 
+[node name="BigCoin" parent="Collectables" unique_id=1297981878 instance=ExtResource("14_cr2eh")]
+position = Vector2(2565, 12)
+
 [node name="Tilesets" type="Node" parent="." unique_id=1793571058]
 
 [node name="Background" type="TileMapLayer" parent="Tilesets" unique_id=165739979]
@@ -1107,8 +1111,5 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1324610874]
 shape = SubResource("WorldBoundaryShape2D_llcge")
-
-[node name="BigCoin" parent="." unique_id=1297981878 instance=ExtResource("14_cr2eh")]
-position = Vector2(2565, 12)
 
 [connection signal="body_entered" from="FinishLine" to="GameManager" method="_on_finish_line_body_entered"]

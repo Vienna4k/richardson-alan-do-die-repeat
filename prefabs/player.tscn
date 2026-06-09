@@ -118,5 +118,7 @@ shape = SubResource("RectangleShape2D_4dohe")
 [node name="StompSFX" type="AudioStreamPlayer" parent="." unique_id=1731477332]
 unique_name_in_owner = true
 stream = ExtResource("3_r66lb")
+volume_db = -8.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="StompDetector" to="." method="_on_stomp_detector_area_entered"]

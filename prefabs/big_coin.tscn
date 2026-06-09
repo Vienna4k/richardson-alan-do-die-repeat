@@ -117,5 +117,6 @@ frame_progress = 0.2909727
 unique_name_in_owner = true
 stream = ExtResource("3_hafvx")
 volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
