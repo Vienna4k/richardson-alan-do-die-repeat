@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vmsdy05jf1ob"
-path="res://.godot/imported/Leg.png-bc96c92adaf4cb75c5dd94aa15daa5e4.ctex"
+uid="uid://b880fu70jduir"
+path="res://.godot/imported/Button-Sheet.png-3c7247bb874fcb1ed9d39c2a1d0e9684.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D Resources/tilesets/Leg.png"
-dest_files=["res://.godot/imported/Leg.png-bc96c92adaf4cb75c5dd94aa15daa5e4.ctex"]
+source_file="res://assets/2D Resources/tilesets/Button-Sheet.png"
+dest_files=["res://.godot/imported/Button-Sheet.png-3c7247bb874fcb1ed9d39c2a1d0e9684.ctex"]
 
 [params]
 

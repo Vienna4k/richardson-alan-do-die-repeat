@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byvtmqmyuhk3i"
-path="res://.godot/imported/BG.png-560b0e6f582400f99dd2267339282f81.ctex"
+uid="uid://dpeoqulwjbaid"
+path="res://.godot/imported/DeadFace.png-51eacd264c70a6d638f6d6041e53a4d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D Resources/BG.png"
-dest_files=["res://.godot/imported/BG.png-560b0e6f582400f99dd2267339282f81.ctex"]
+source_file="res://assets/2D Resources/characters/DeadFace.png"
+dest_files=["res://.godot/imported/DeadFace.png-51eacd264c70a6d638f6d6041e53a4d6.ctex"]
 
 [params]
 

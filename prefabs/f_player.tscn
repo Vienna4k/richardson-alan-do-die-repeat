@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b1ly1qcxan6oh" path="res://assets/2D Resources/characters/Face-Sheet.png" id="1_3622m"]
 [ext_resource type="Script" uid="uid://cnsetdsacsgg6" path="res://scripts/f_player.gd" id="1_hdm5p"]
-[ext_resource type="Texture2D" uid="uid://vmsdy05jf1ob" path="res://assets/2D Resources/tilesets/Leg.png" id="2_y0734"]
+[ext_resource type="Texture2D" uid="uid://vmsdy05jf1ob" path="res://assets/2D Resources/Leg.png" id="2_y0734"]
+[ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="4_wdjl8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0734"]
 size = Vector2(2.000001, 16.000004)
@@ -55,6 +56,10 @@ region = Rect2(320, 0, 32, 32)
 atlas = ExtResource("1_3622m")
 region = Rect2(352, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s84pi"]
+atlas = ExtResource("4_wdjl8")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nliuv"]
 atlas = ExtResource("1_3622m")
 region = Rect2(0, 0, 32, 32)
@@ -104,6 +109,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_s84pi")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nliuv")
 }],
 "loop": true,
@@ -133,7 +146,7 @@ position = Vector2(-9.536743e-07, 1.9073486e-06)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_y0734")
 
-[node name="RightLeg" type="RigidBody2D" parent="." unique_id=252819289]
+[node name="RightLeg" type="RigidBody2D" parent="." unique_id=252819289 groups=["players"]]
 position = Vector2(5.999999, 13)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 4
@@ -151,7 +164,7 @@ shape = SubResource("RectangleShape2D_y0734")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=489728073]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_s84pi")
-animation = &"blink"
+animation = &"die"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691440195]
