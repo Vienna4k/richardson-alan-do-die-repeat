@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dyq2765v7pp3g"]
+[gd_scene format=3 uid="uid://cbjudr0fkikaa"]
 
 [ext_resource type="Texture2D" uid="uid://b1ly1qcxan6oh" path="res://assets/2D Resources/characters/Face-Sheet.png" id="1_3622m"]
 [ext_resource type="Script" uid="uid://cnsetdsacsgg6" path="res://scripts/f_player.gd" id="1_hdm5p"]
@@ -127,7 +127,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdm5p"]
 size = Vector2(16, 16)
 
-[node name="F-Player" type="RigidBody2D" unique_id=275234299]
+[node name="F-Player" type="RigidBody2D" unique_id=275234299 groups=["players"]]
 lock_rotation = true
 script = ExtResource("1_hdm5p")
 

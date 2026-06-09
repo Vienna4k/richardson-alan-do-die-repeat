@@ -12,8 +12,8 @@ const STAND_TORQUE: float = 30000.0
 const JUMP_IMPULSE: float = -1050.0
 const STRIDE_SPEED: float = 24.0
 
-const STAND_ANGLE_LEFT: float = deg_to_rad(10.0)  # Splay left leg slightly outward
-const STAND_ANGLE_RIGHT: float = deg_to_rad(-10.0)  # Splay right leg slightly outward
+const STAND_ANGLE_LEFT: float = deg_to_rad(5.0)  # Splay left leg slightly outward
+const STAND_ANGLE_RIGHT: float = deg_to_rad(-5.0)  # Splay right leg slightly outward
 
 var run_time: float = 0.0
 
@@ -56,9 +56,9 @@ func die() -> void:
 	if has_node("LeftHip"): $LeftHip.queue_free()
 	if has_node("RightHip"): $RightHip.queue_free()
 	
-	# Make the corpse much heavier and sluggish so it's a solid puzzle piece
-	mass = 60.0
-	linear_damp = 15.0
+	# Fix the collision layer! Make sure the dead body exists on Layers 2 and 4 
+	# so that the next player's legs (which use collision masks 2 and 4) stand on it!
+	collision_layer |= 6 # This uses bitwise OR to actively add layers 2 and 3 (values 2 and 4)
 	
 	# Give the corpse a frictionless material! In Godot, sliding a 
 	# RigidBody on top of another RigidBody catches on the corners and causes 
@@ -84,11 +84,39 @@ func die() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		# Wait for the corpse to organically hit the ground and settle before freezing it!
+		if not freeze and linear_velocity.length() < 10.0 and floor_raycast.is_colliding():
+			freeze = true
+			freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
+			
+			# Spawn a pure StaticBody2D duplicate just for the legs to stand on cleanly!
+			var solid_platform : StaticBody2D = StaticBody2D.new()
+			# Put this platform purely on physics layers 2 and 3 so ONLY the player legs stand on it
+			# Do NOT put it in the 'players' group so it doesn't double-trigger buttons!
+			solid_platform.collision_layer = 6
+			solid_platform.collision_mask = 0
+			
+			# Give it a brand new shape of identical size to the player
+			var platform_shape : CollisionShape2D = CollisionShape2D.new()
+			var rect := RectangleShape2D.new() as RectangleShape2D
+			rect.size = Vector2(16, 16) # From your f_player.tscn shape
+			platform_shape.shape = rect
+			solid_platform.add_child(platform_shape)
+			
+			# Give it full traction so the player doesn't slip off
+			solid_platform.physics_material_override = PhysicsMaterial.new()
+			solid_platform.physics_material_override.friction = 1.0
+			
+			add_child(solid_platform)
+			
+			# Now remove the RigidBody's ability to touch the player's legs so they don't fight
+			collision_layer &= ~6 # Remove layers 2 and 3 from the main corpse body
+				
 		# Corpses don't move or take input!
 		return
 
 	# Add a self-destruct key for testing the puzzle mechanic!
-	if Input.is_action_pressed("kill") or Input.is_key_pressed(KEY_K):
+	if Input.is_action_pressed("kill"):
 		death_charge += delta
 		var shake_intensity: float = (death_charge / DEATH_CHARGE_MAX) * 5.0
 		animated_sprite.position = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
@@ -163,5 +191,3 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = false
 	elif direction < 0.0:
 		animated_sprite.flip_h = true
-
-	# We do NOT run `move_and_slide()` anymore because the physics engine handles RigidBody2D movement!

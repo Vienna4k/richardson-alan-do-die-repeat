@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dvuen0umxqs5d"]
+[gd_scene format=3 uid="uid://dvcqlje5enlrd"]
 
-[ext_resource type="Script" uid="uid://bnbs7banyvytg" path="res://scripts/button.gd" id="1_s5sk6"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="1_s5sk6"]
 [ext_resource type="Texture2D" uid="uid://b880fu70jduir" path="res://assets/2D Resources/tilesets/Button-Sheet.png" id="2_f40y1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f40y1"]
-size = Vector2(32, 18)
+size = Vector2(32, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqs03"]
 resource_local_to_scene = true
@@ -107,7 +107,7 @@ hframes = 12
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1007222183]
-position = Vector2(0, -1)
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_f40y1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2084724635]
@@ -120,3 +120,4 @@ shape = SubResource("RectangleShape2D_uqs03")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1198630675]
 libraries/ = SubResource("AnimationLibrary_2ure8")
+speed_scale = 2.0
