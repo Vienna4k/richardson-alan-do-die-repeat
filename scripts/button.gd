@@ -1,13 +1,18 @@
+class_name GameButton
+
 extends Area2D
 
-signal button_pressed
-signal button_released
+signal button_pressed(channel: int)
+signal button_released(channel: int)
+
+@export var channel : int = 0
 
 @onready var button_anim : AnimationPlayer = $AnimationPlayer
 
 var is_pressed := false
 
 func _ready() -> void:
+	add_to_group("buttons")
 	# Connect the signals from the Area2D's body enter/exit
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -18,7 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if not is_pressed:
 			is_pressed = true
 			button_anim.play("press_down")
-			button_pressed.emit() # Send a signal out to your Portal or GameManager
+			button_pressed.emit(channel) # Send a signal out to your Portal or GameManager
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("players"):
@@ -27,5 +32,5 @@ func _on_body_exited(body: Node2D) -> void:
 		if get_overlapping_bodies().filter(func(b: Node2D) -> bool: return (b.is_in_group("players") or b.is_in_group("Player")) and b != body).is_empty():
 			is_pressed = false
 			button_anim.play_backwards("press_down") # Or play a separate "release" animation
-			button_released.emit()
+			button_released.emit(channel)
 
