@@ -308,6 +308,7 @@ limit_left = 0
 limit_top = 768
 limit_right = 1984
 limit_bottom = 1007
+position_smoothing_enabled = true
 
 [node name="Door" parent="." unique_id=1223700433 instance=ExtResource("5_37o0v")]
 position = Vector2(389, 800)

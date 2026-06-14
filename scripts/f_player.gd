@@ -150,13 +150,13 @@ func _physics_process(delta: float) -> void:
 	var direction: float = Input.get_axis("left", "right")
 	
 	if direction != 0.0:
-		# 1. Apply the "assist" to the main body
+		# 1. Apply assist
 		apply_central_force(Vector2(direction * ASSIST_FORCE, 0.0))
 		
-		# 2. Drive the legs as synchronized motors! This creates a guaranteed, perfectly timed stride.
+		# 2. Drive the legs
 		run_time += direction * delta * STRIDE_SPEED
 		
-		# The left leg targets the current motor time, the right leg is permanently offset by PI (180 degrees)
+		# The left leg targets the current motor time, the right leg is permanently offset
 		var left_target: float = run_time
 		var right_target: float = run_time + PI
 		
@@ -185,8 +185,7 @@ func _physics_process(delta: float) -> void:
 		# Apply some artificial breaking (dampening) to stop them from swinging endlessly
 		left_leg.apply_torque(-left_leg.angular_velocity * 1000.0)
 		right_leg.apply_torque(-right_leg.angular_velocity * 1000.0)
-		
-	# Flip the sprite visually so they face the right way
+	
 	if direction > 0.0:
 		animated_sprite.flip_h = false
 	elif direction < 0.0:
