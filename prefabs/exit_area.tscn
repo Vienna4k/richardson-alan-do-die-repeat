@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dmpdjq1hngkxc"]
+
+[ext_resource type="Script" uid="uid://ccossmjyxuq2v" path="res://scripts/exit_area.gd" id="1_0w5wu"]
+
+[node name="ExitArea" type="Area2D" unique_id=163354526]
+script = ExtResource("1_0w5wu")

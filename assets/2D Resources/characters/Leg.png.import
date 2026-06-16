@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vmsdy05jf1ob"
-path="res://.godot/imported/Leg.png-414190462bd3aae566d9005c562e2fbe.ctex"
+path="res://.godot/imported/Leg.png-ba378c971b41433fcf15a069306deb0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D Resources/Leg.png"
-dest_files=["res://.godot/imported/Leg.png-414190462bd3aae566d9005c562e2fbe.ctex"]
+source_file="res://assets/2D Resources/characters/Leg.png"
+dest_files=["res://.godot/imported/Leg.png-ba378c971b41433fcf15a069306deb0a.ctex"]
 
 [params]
 

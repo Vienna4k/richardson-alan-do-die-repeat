@@ -1,24 +1,37 @@
 class_name FPlayer
-extends RigidBody2D
+extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var left_leg: RigidBody2D = $LeftLeg
-@onready var right_leg: RigidBody2D = $RightLeg
-@onready var floor_raycast: RayCast2D = $FloorRayCast  # We will use this to detect the floor!
 
-const ASSIST_FORCE: float = 1000.0
-const LEG_TORQUE: float = 30000.0
-const STAND_TORQUE: float = 30000.0
-const JUMP_IMPULSE: float = -1050.0
-const STRIDE_SPEED: float = 24.0
+# IK Targets and RayCasts
+@onready var left_target: Node2D = $LeftTarget
+@onready var right_target: Node2D = $RightTarget
+@onready var left_ray: RayCast2D = $LeftRay
+@onready var right_ray: RayCast2D = $RightRay
 
-const STAND_ANGLE_LEFT: float = deg_to_rad(5.0)  # Splay left leg slightly outward
-const STAND_ANGLE_RIGHT: float = deg_to_rad(-5.0)  # Splay right leg slightly outward
+# Movement Variables
+const MAX_SPEED: float = 300.0
+const ACCELERATION: float = 1200.0
+const FRICTION: float = 1200.0
+const JUMP_VELOCITY: float = -400.0
 
-var run_time: float = 0.0
+# Procedural Stepping Variables
+const STEP_DISTANCE: float = 10.0    # How far the raycast can get before foot must step
+const STEP_SPEED: float = 0.1       # How fast the step Tween is
+const STEP_HEIGHT: float = 15.0      # How high the foot arcs up into the air
+
+var is_left_stepping: bool = false
+var is_right_stepping: bool = false
+
+var left_tween: Tween
+var right_tween: Tween
+var left_tween_y: Tween
+var right_tween_y: Tween
 
 var is_dead: bool = false
+var was_on_floor: bool = true
 var spawn_position: Vector2
+var bob_time: float = 0.0
 
 var death_charge: float = 0.0
 const DEATH_CHARGE_MAX: float = 1.0 # Requires holding the key for 1 second
@@ -28,6 +41,23 @@ func _ready() -> void:
 	spawn_position = global_position # Save our initial spawn point
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	_start_blink_timer()
+	
+	# Detach the foot targets from the body.
+	left_target.top_level = true
+	right_target.top_level = true
+	
+	# Place the targets exactly on the floor initially so they don't spawn hovering!
+	left_ray.force_raycast_update()
+	right_ray.force_raycast_update()
+	left_target.global_position = left_ray.get_collision_point() if left_ray.is_colliding() else left_ray.to_global(left_ray.target_position)
+	right_target.global_position = right_ray.get_collision_point() if right_ray.is_colliding() else right_ray.to_global(right_ray.target_position)
+
+	# Instantly snap the camera if there is one on the player (prevents scene load flash/wig out)
+	for child in get_children():
+		if child is Camera2D:
+			var cam := child as Camera2D
+			cam.reset_smoothing()
+			break
 
 func _start_blink_timer() -> void:
 	var wait_time: float = randf_range(5.0, 20.0)
@@ -50,69 +80,59 @@ func die() -> void:
 	# Close eyes for the corpse
 	animated_sprite.play("die")
 	
-	# Destroy the legs and joints so it's just a body block
-	if is_instance_valid(left_leg): left_leg.queue_free()
-	if is_instance_valid(right_leg): right_leg.queue_free()
-	if has_node("LeftHip"): $LeftHip.queue_free()
-	if has_node("RightHip"): $RightHip.queue_free()
+	# Hide the IK legs so it's just a dead block body
+	var skeleton := get_node_or_null("Skeleton2D") as Skeleton2D
+	if skeleton: skeleton.hide()
 	
-	# Fix the collision layer! Make sure the dead body exists on Layers 2 and 4 
-	# so that the next player's legs (which use collision masks 2 and 4) stand on it!
-	collision_layer |= 6 # This uses bitwise OR to actively add layers 2 and 3 (values 2 and 4)
+	# Destroy the invisible stilts holding the body up, making the corpse plummet to the floor!
+	var stilts := get_node_or_null("LegCollider") as CollisionShape2D
+	if stilts: stilts.queue_free()
 	
-	# Give the corpse a frictionless material! In Godot, sliding a 
-	# RigidBody on top of another RigidBody catches on the corners and causes 
-	# violent physics jitter. Zero friction makes it a smooth platform!
-	var mat : PhysicsMaterial = PhysicsMaterial.new()
-	mat.friction = 0.0
-	physics_material_override = mat
+	# Fix the collision layer! Make sure the dead body exists on Layers 2 and 3
+	# so that the next player's raycasts and leg collisions detect it as ground!
+	collision_layer |= 6 
+	
+	# 1) Wait a bit so the player gets to stare at their failure
+	# Setting a timer in Godot 4: 
+	await get_tree().create_timer(1.0).timeout
 	
 	# Instantiate a completely new player at the last spawn position!
 	var player_scene: PackedScene = load("res://prefabs/f_player.tscn") as PackedScene
 	var new_player: FPlayer = player_scene.instantiate() as FPlayer
 	new_player.global_position = spawn_position
 	
-	# Move the camera from the old body to the new one!
+	# Move the camera from the old body to the new one smoothly!
+	var camera: Camera2D = null
 	for child in get_children():
 		if child is Camera2D:
-			remove_child(child)
-			new_player.add_child(child)
-			break # Assuming you only have one camera
+			camera = child
+			break 
 			
-	# Use call_deferred to safely add the new player to the game world during physics processing
+	if camera:
+		# Detach the camera completely from the corpse
+		remove_child(camera)
+		
+		# Add it securely onto the new player
+		new_player.add_child(camera)
+		camera.position = Vector2.ZERO
+		
+		new_player.ready.connect(func() -> void:
+			# Force the camera to snap immediately to the new player, killing any trailing smoothing!
+			camera.reset_smoothing()
+		)
+			
+	# Safely add the new player to the game world during physics processing
 	get_parent().call_deferred("add_child", new_player)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
-		# Wait for the corpse to organically hit the ground and settle before freezing it!
-		if not freeze and linear_velocity.length() < 10.0 and floor_raycast.is_colliding():
-			freeze = true
-			freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
-			
-			# Spawn a pure StaticBody2D duplicate just for the legs to stand on cleanly!
-			var solid_platform : StaticBody2D = StaticBody2D.new()
-			# Put this platform purely on physics layers 2 and 3 so ONLY the player legs stand on it
-			# Do NOT put it in the 'players' group so it doesn't double-trigger buttons!
-			solid_platform.collision_layer = 6
-			solid_platform.collision_mask = 0
-			
-			# Give it a brand new shape of identical size to the player
-			var platform_shape : CollisionShape2D = CollisionShape2D.new()
-			var rect := RectangleShape2D.new() as RectangleShape2D
-			rect.size = Vector2(16, 16) # From your f_player.tscn shape
-			platform_shape.shape = rect
-			solid_platform.add_child(platform_shape)
-			
-			# Give it full traction so the player doesn't slip off
-			solid_platform.physics_material_override = PhysicsMaterial.new()
-			solid_platform.physics_material_override.friction = 1.0
-			
-			add_child(solid_platform)
-			
-			# Now remove the RigidBody's ability to touch the player's legs so they don't fight
-			collision_layer &= ~6 # Remove layers 2 and 3 from the main corpse body
-				
-		# Corpses don't move or take input!
+		# Corpses should plummet to the earth, sliding to a halt!
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		else:
+			# Skidding friction for a falling corpse
+			velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+		move_and_slide()
 		return
 
 	# Add a self-destruct key for testing the puzzle mechanic!
@@ -134,59 +154,127 @@ func _physics_process(delta: float) -> void:
 			death_charge -= delta * 2.0 # Slowly lose charge if released early
 			if death_charge <= 0.0:
 				death_charge = 0.0
-				animated_sprite.position = Vector2.ZERO
 				animated_sprite.modulate = Color.WHITE
 			else:
 				# Continue shaking but with decreasing intensity
 				var shake_intensity: float = (death_charge / DEATH_CHARGE_MAX) * 5.0
 				animated_sprite.position = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
 				animated_sprite.modulate = Color(1.0, 1.0 - (death_charge / DEATH_CHARGE_MAX), 1.0 - (death_charge / DEATH_CHARGE_MAX))
+		
+		# If we aren't exploding, do a breathing/walking headbob!
+		if death_charge == 0.0:
+			var bob_speed: float = 10.0 if abs(velocity.x) > 10.0 else 3.0
+			var bob_amount: float = 1.0 if abs(velocity.x) > 10.0 else .5
+			bob_time += delta * bob_speed
+			animated_sprite.position.y = sin(bob_time) * bob_amount
+			animated_sprite.position.x = 0.0
 
-	if Input.is_action_just_pressed("jump"):
-		# Only jump if the RayCast is actually hitting the floor
-		if floor_raycast.is_colliding():
-			apply_central_impulse(Vector2(0.0, JUMP_IMPULSE))
+	# ==== MOVEMENT ====
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 	var direction: float = Input.get_axis("left", "right")
 	
 	if direction != 0.0:
-		# 1. Apply assist
-		apply_central_force(Vector2(direction * ASSIST_FORCE, 0.0))
-		
-		# 2. Drive the legs
-		run_time += direction * delta * STRIDE_SPEED
-		
-		# The left leg targets the current motor time, the right leg is permanently offset
-		var left_target: float = run_time
-		var right_target: float = run_time + PI
-		
-		var left_diff: float = angle_difference(left_leg.rotation, left_target)
-		var right_diff: float = angle_difference(right_leg.rotation, right_target)
-		
-		left_leg.apply_torque(left_diff * LEG_TORQUE)
-		right_leg.apply_torque(right_diff * LEG_TORQUE)
-		
-		# Dampening keeps them tightly synced to the stride timer instead of violently overshooting
-		left_leg.apply_torque(-left_leg.angular_velocity * 1000.0)
-		right_leg.apply_torque(-right_leg.angular_velocity * 1000.0)
+		# Slippery acceleration
+		velocity.x = move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
 	else:
-		# When jumping from a standstill or just turning around, we don't want the legs to snap to 0 immediately
-		# Let's reset the run target to whatever the leg average is so that taking off again is smooth
-		run_time = (left_leg.rotation + right_leg.rotation) / 2.0
+		# Slippery deceleration
+		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 		
-		# Stand the legs back up into a stable 'A' frame pose
-		var left_diff: float = angle_difference(left_leg.rotation, STAND_ANGLE_LEFT)
-		var right_diff: float = angle_difference(right_leg.rotation, STAND_ANGLE_RIGHT)
-		
-		# Apply a strong corrective torque to push them towards their standing angles
-		left_leg.apply_torque(left_diff * STAND_TORQUE)
-		right_leg.apply_torque(right_diff * STAND_TORQUE)
-		
-		# Apply some artificial breaking (dampening) to stop them from swinging endlessly
-		left_leg.apply_torque(-left_leg.angular_velocity * 1000.0)
-		right_leg.apply_torque(-right_leg.angular_velocity * 1000.0)
-	
 	if direction > 0.0:
 		animated_sprite.flip_h = false
 	elif direction < 0.0:
 		animated_sprite.flip_h = true
+
+	move_and_slide()
+	_handle_procedural_legs()
+	was_on_floor = is_on_floor()
+
+func _handle_procedural_legs() -> void:
+	# Force the raycasts to update to the current frame's position immediately
+	left_ray.force_raycast_update()
+	right_ray.force_raycast_update()
+	
+	# Get the ideal resting place from where the RayCast hits the floor.
+	# If in the air, making them reach for the end of the raycast lets them dangle down naturally!
+	var l_hit: Vector2 = left_ray.get_collision_point() if left_ray.is_colliding() else left_ray.to_global(left_ray.target_position)
+	var r_hit: Vector2 = right_ray.get_collision_point() if right_ray.is_colliding() else right_ray.to_global(right_ray.target_position)
+	
+	# How far the foot currently is from where it SHOULD be
+	var l_dist := left_target.global_position.distance_to(l_hit)
+	var r_dist := right_target.global_position.distance_to(r_hit)
+	
+	if not is_on_floor():
+		# When in the air, legs just dangle smoothly towards the raycast tips
+		if left_tween and left_tween.is_valid(): left_tween.kill()
+		if right_tween and right_tween.is_valid(): right_tween.kill()
+		if left_tween_y and left_tween_y.is_valid(): left_tween_y.kill()
+		if right_tween_y and right_tween_y.is_valid(): right_tween_y.kill()
+		
+		left_target.global_position = left_target.global_position.lerp(l_hit, 20.0 * get_physics_process_delta_time())
+		right_target.global_position = right_target.global_position.lerp(r_hit, 20.0 * get_physics_process_delta_time())
+		
+		# Reset any active step states so they instantly start stepping again when landing
+		is_left_stepping = false
+		is_right_stepping = false
+		return
+		
+	if is_on_floor() and not was_on_floor:
+		# We just landed! Snap the legs directly to the floor instantly without triggering a stepping animation.
+		# They were already dangling right above it, so this connects them seamlessly.
+		left_target.global_position = l_hit
+		right_target.global_position = r_hit
+		return
+	
+	# We want them to take turns, BUT if one gets extremely far behind while the other is stepping,
+	# it is allowed to step simultaneously so it doesn't get ripped off!
+	if l_dist > STEP_DISTANCE and not is_left_stepping:
+		if not is_right_stepping or l_dist > STEP_DISTANCE * 1.5:
+			_step_leg(left_target, l_hit, true)
+			
+	if r_dist > STEP_DISTANCE and not is_right_stepping:
+		if not is_left_stepping or r_dist > STEP_DISTANCE * 1.5:
+			_step_leg(right_target, r_hit, false)
+
+func _step_leg(target_node: Node2D, base_target_pos: Vector2, is_left: bool) -> void:
+	var overstep: float = 0.0
+	if is_on_floor():
+		# Dynamic stride! The faster we go, the further ahead we reach, but capped so we don't break the IK
+		overstep = clamp(velocity.x * (STEP_SPEED * 1.2), -30.0, 30.0)
+		
+	var final_target_x: float = base_target_pos.x + overstep
+	
+	# Lift the foot UP (ease out), then slam it DOWN (ease in) for a realistic arc
+	var height_bonus : float = STEP_HEIGHT if is_on_floor() else 2.0
+	var mid_y: float = min(target_node.global_position.y, base_target_pos.y) - height_bonus
+	
+	if is_left:
+		is_left_stepping = true
+		if left_tween and left_tween.is_valid(): left_tween.kill()
+		if left_tween_y and left_tween_y.is_valid(): left_tween_y.kill()
+		
+		left_tween = create_tween()
+		left_tween_y = create_tween()
+		
+		left_tween.tween_property(target_node, "global_position:x", final_target_x, STEP_SPEED)
+		left_tween_y.tween_property(target_node, "global_position:y", mid_y, STEP_SPEED / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		left_tween_y.tween_property(target_node, "global_position:y", base_target_pos.y, STEP_SPEED / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		
+		left_tween.finished.connect(func() -> void: is_left_stepping = false)
+	else:
+		is_right_stepping = true
+		if right_tween and right_tween.is_valid(): right_tween.kill()
+		if right_tween_y and right_tween_y.is_valid(): right_tween_y.kill()
+		
+		right_tween = create_tween()
+		right_tween_y = create_tween()
+		
+		right_tween.tween_property(target_node, "global_position:x", final_target_x, STEP_SPEED)
+		right_tween_y.tween_property(target_node, "global_position:y", mid_y, STEP_SPEED / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		right_tween_y.tween_property(target_node, "global_position:y", base_target_pos.y, STEP_SPEED / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		
+		right_tween.finished.connect(func() -> void: is_right_stepping = false)
