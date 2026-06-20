@@ -240,11 +240,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Slippery deceleration
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
-		
-	if direction > 0.0:
-		animated_sprite.flip_h = false
-	elif direction < 0.0:
-		animated_sprite.flip_h = true
 
 	move_and_slide()
 	_handle_procedural_legs()
