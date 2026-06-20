@@ -9,6 +9,12 @@ extends CharacterBody2D
 @onready var left_ray: RayCast2D = $LeftRay
 @onready var right_ray: RayCast2D = $RightRay
 
+# Physical Arm Nodes
+@onready var left_arm: RigidBody2D = $LeftArm
+@onready var right_arm: RigidBody2D = $RightArm
+@onready var left_shoulder: PinJoint2D = $LeftShoulder
+@onready var right_shoulder: PinJoint2D = $RightShoulder
+
 # Movement Variables
 const MAX_SPEED: float = 300.0
 const ACCELERATION: float = 1200.0
@@ -35,6 +41,9 @@ var bob_time: float = 0.0
 
 var death_charge: float = 0.0
 const DEATH_CHARGE_MAX: float = 1.0 # Requires holding the key for 1 second
+
+var carried_corpse: FPlayer = null
+var is_carried: bool = false
 
 func _ready() -> void:
 	add_to_group("players") # Ensure the main body triggers buttons!
@@ -76,6 +85,15 @@ func _on_animation_finished() -> void:
 func die() -> void:
 	if is_dead: return
 	is_dead = true
+	add_to_group("corpses")
+	
+	if left_arm: left_arm.hide()
+	if right_arm: right_arm.hide()
+	
+	if carried_corpse:
+		carried_corpse.is_carried = false
+		carried_corpse.collision_layer |= 6
+		carried_corpse = null
 	
 	# Close eyes for the corpse
 	animated_sprite.play("die")
@@ -92,8 +110,7 @@ func die() -> void:
 	# so that the next player's raycasts and leg collisions detect it as ground!
 	collision_layer |= 6 
 	
-	# 1) Wait a bit so the player gets to stare at their failure
-	# Setting a timer in Godot 4: 
+	# Wait a bit so the player gets to stare at their failure
 	await get_tree().create_timer(1.0).timeout
 	
 	# Instantiate a completely new player at the last spawn position!
@@ -126,6 +143,9 @@ func die() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		if is_carried:
+			return # Do not fall or collide while carried
+			
 		# Corpses should plummet to the earth, sliding to a halt!
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -168,6 +188,42 @@ func _physics_process(delta: float) -> void:
 			bob_time += delta * bob_speed
 			animated_sprite.position.y = sin(bob_time) * bob_amount
 			animated_sprite.position.x = 0.0
+			
+			# Arm / carry logic
+			if carried_corpse:
+				carried_corpse.global_position = global_position + Vector2(0, -20)
+				
+				# Lock arms and point them at the corpse
+				left_arm.freeze = true
+				right_arm.freeze = true
+				left_arm.global_position = left_shoulder.global_position
+				right_arm.global_position = right_shoulder.global_position
+				
+				left_arm.look_at(carried_corpse.global_position)
+				right_arm.look_at(carried_corpse.global_position)
+				
+				# Drop corpse
+				if Input.is_action_just_pressed("pickup"):
+					carried_corpse.is_carried = false
+					# Restore collisions so it hits the floor and can be stepped on!
+					carried_corpse.collision_layer = 6
+					carried_corpse.collision_mask = 1 # (Assuming your floor is on Mask 1)
+					carried_corpse = null
+					
+					# Turn physics back on!
+					left_arm.freeze = false
+					right_arm.freeze = false
+			else:
+				# Pick up corpse
+				if Input.is_action_just_pressed("pickup"):
+					var closest := _get_closest_corpse(30.0)
+					if closest:
+						carried_corpse = closest
+						carried_corpse.is_carried = true
+						# Completely turn off all collisions so it doesn't act as a ceiling
+						carried_corpse.collision_layer = 0
+						carried_corpse.collision_mask = 0 
+						carried_corpse.velocity = Vector2.ZERO
 
 	# ==== MOVEMENT ====
 	if not is_on_floor():
@@ -278,3 +334,20 @@ func _step_leg(target_node: Node2D, base_target_pos: Vector2, is_left: bool) -> 
 		right_tween_y.tween_property(target_node, "global_position:y", base_target_pos.y, STEP_SPEED / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		
 		right_tween.finished.connect(func() -> void: is_right_stepping = false)
+
+func _get_closest_corpse(max_dist: float) -> FPlayer:
+	var closest: FPlayer = null
+	var best_dist: float = max_dist
+	
+	for node in get_tree().get_nodes_in_group("corpses"):
+		# Explicitly cast the generic Node to your FPlayer class
+		var corpse := node as FPlayer
+		
+		# Check if the cast was successful (it is an FPlayer) and not self
+		if corpse and corpse != self:
+			var d := global_position.distance_to(corpse.global_position)
+			if d < best_dist:
+				best_dist = d
+				closest = corpse
+				
+	return closest

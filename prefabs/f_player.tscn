@@ -25,6 +25,12 @@ modification_count = 2
 modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_wdjl8")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_m3mp2")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdjl8"]
+size = Vector2(16, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3mp2"]
+size = Vector2(16, 2)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0734"]
 atlas = ExtResource("1_3622m")
 region = Rect2(0, 0, 32, 32)
@@ -229,6 +235,50 @@ auto_calculate_length_and_angle = false
 length = 10.0
 bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
+
+[node name="LeftShoulder" type="PinJoint2D" parent="." unique_id=1696843357]
+position = Vector2(-6, 1)
+node_a = NodePath("..")
+node_b = NodePath("../LeftArm")
+bias = 0.9
+
+[node name="RightShoulder" type="PinJoint2D" parent="." unique_id=1367192478]
+position = Vector2(6, 1)
+node_a = NodePath("..")
+node_b = NodePath("../RightArm")
+bias = 0.9
+
+[node name="LeftArm" type="RigidBody2D" parent="." unique_id=2135114819]
+position = Vector2(-6, 1)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+angular_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftArm" unique_id=456540172]
+position = Vector2(8, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_m3mp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArm" unique_id=2017259058]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_wdjl8")
+
+[node name="RightArm" type="RigidBody2D" parent="." unique_id=948248068]
+position = Vector2(6, 1)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+angular_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RightArm" unique_id=121899102]
+position = Vector2(8, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_m3mp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm" unique_id=1202760812]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_m3mp2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=489728073]
 scale = Vector2(0.5, 0.5)
