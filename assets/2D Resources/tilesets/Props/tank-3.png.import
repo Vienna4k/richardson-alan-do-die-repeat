@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di041lhdfh4di"
-path="res://.godot/imported/middle.png-7a7032d6c88d2c93533e0d89ba33a4e6.ctex"
+uid="uid://clcdpoigyaddt"
+path="res://.godot/imported/tank-3.png-19b8a6425fd64782fe4aaabac8812f96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D Resources/tilesets/middle.png"
-dest_files=["res://.godot/imported/middle.png-7a7032d6c88d2c93533e0d89ba33a4e6.ctex"]
+source_file="res://assets/2D Resources/tilesets/Props/tank-3.png"
+dest_files=["res://.godot/imported/tank-3.png-19b8a6425fd64782fe4aaabac8812f96.ctex"]
 
 [params]
 

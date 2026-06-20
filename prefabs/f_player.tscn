@@ -1,0 +1,313 @@
+[gd_scene format=3 uid="uid://dcqf853kquja5"]
+
+[ext_resource type="Texture2D" uid="uid://b1ly1qcxan6oh" path="res://assets/2D Resources/characters/Face-Sheet.png" id="1_3622m"]
+[ext_resource type="Script" uid="uid://cnsetdsacsgg6" path="res://scripts/f_player.gd" id="1_hdm5p"]
+[ext_resource type="Texture2D" uid="uid://vmsdy05jf1ob" path="res://assets/2D Resources/characters/Leg.png" id="4_m3mp2"]
+[ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="4_wdjl8"]
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_wdjl8"]
+target_nodepath = NodePath("../LeftTarget")
+joint_one_bone_idx = 0
+joint_one_bone2d_node = NodePath("LeftHip")
+joint_two_bone_idx = 1
+joint_two_bone2d_node = NodePath("LeftHip/LeftKnee")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_m3mp2"]
+target_nodepath = NodePath("../RightTarget")
+joint_one_bone_idx = 3
+joint_one_bone2d_node = NodePath("RightHip")
+joint_two_bone_idx = 4
+joint_two_bone2d_node = NodePath("RightHip/RightKnee")
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_oiaiq"]
+enabled = true
+modification_count = 2
+modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_wdjl8")
+modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_m3mp2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdjl8"]
+size = Vector2(16, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3mp2"]
+size = Vector2(16, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0734"]
+atlas = ExtResource("1_3622m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdjl8"]
+atlas = ExtResource("1_3622m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3mp2"]
+atlas = ExtResource("1_3622m")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiaiq"]
+atlas = ExtResource("1_3622m")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h314"]
+atlas = ExtResource("1_3622m")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86tr1"]
+atlas = ExtResource("1_3622m")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qwpu"]
+atlas = ExtResource("1_3622m")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82vn7"]
+atlas = ExtResource("1_3622m")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftw5k"]
+atlas = ExtResource("1_3622m")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp6r7"]
+atlas = ExtResource("1_3622m")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi4nh"]
+atlas = ExtResource("1_3622m")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmtxf"]
+atlas = ExtResource("1_3622m")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s84pi"]
+atlas = ExtResource("4_wdjl8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nliuv"]
+atlas = ExtResource("1_3622m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s84pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0734")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdjl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3mp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiaiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h314")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86tr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qwpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82vn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftw5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp6r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi4nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmtxf")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s84pi")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nliuv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdm5p"]
+size = Vector2(16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdjl8"]
+radius = 8.0
+height = 32.0
+
+[node name="F-Player" type="CharacterBody2D" unique_id=1550749790 groups=["players"]]
+script = ExtResource("1_hdm5p")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=1821008932]
+modification_stack = SubResource("SkeletonModificationStack2D_oiaiq")
+
+[node name="LeftHip" type="Bone2D" parent="Skeleton2D" unique_id=1468887166]
+position = Vector2(-6, 7)
+rest = Transform2D(0.90000266, -0.43588075, 0.43588075, 0.90000266, -6, 7)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 90.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/LeftHip" unique_id=1721377790]
+position = Vector2(0, 4.3095007)
+rotation = 1.5707964
+scale = Vector2(0.28293335, 0.46749324)
+texture = ExtResource("4_m3mp2")
+
+[node name="LeftKnee" type="Bone2D" parent="Skeleton2D/LeftHip" unique_id=1961621074]
+position = Vector2(0, 8)
+rest = Transform2D(0.6200098, 0.7845881, -0.7845881, 0.6200098, 0, 8)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 90.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Skeleton2D/LeftHip/LeftKnee" unique_id=33698344]
+position = Vector2(0, 5)
+rotation = 1.5707964
+scale = Vector2(0.28293335, 0.46749324)
+texture = ExtResource("4_m3mp2")
+
+[node name="LeftFoot" type="Bone2D" parent="Skeleton2D/LeftHip/LeftKnee" unique_id=1355289798]
+position = Vector2(0, 10)
+rest = Transform2D(1, 0, 0, 1, 0, 10)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+
+[node name="RightHip" type="Bone2D" parent="Skeleton2D" unique_id=72641279]
+position = Vector2(6, 7)
+rest = Transform2D(0.9000024, -0.43586946, 0.43586946, 0.9000024, 6, 7)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 90.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/RightHip" unique_id=2115200439]
+position = Vector2(0, 4.3095007)
+rotation = 1.5707964
+scale = Vector2(0.28293335, 0.46749324)
+texture = ExtResource("4_m3mp2")
+
+[node name="RightKnee" type="Bone2D" parent="Skeleton2D/RightHip" unique_id=643271720]
+position = Vector2(0, 8)
+rest = Transform2D(0.6200261, 0.78457564, -0.78457564, 0.6200261, 0, 8)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 90.0
+editor_settings/show_bone_gizmo = false
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Skeleton2D/RightHip/RightKnee" unique_id=804403095]
+position = Vector2(0, 5)
+rotation = 1.5707964
+scale = Vector2(0.28293335, 0.46749324)
+texture = ExtResource("4_m3mp2")
+
+[node name="RightFoot" type="Bone2D" parent="Skeleton2D/RightHip/RightKnee" unique_id=1370825344]
+position = Vector2(0, 10)
+rest = Transform2D(1, 0, 0, 1, 0, 10)
+auto_calculate_length_and_angle = false
+length = 10.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
+
+[node name="LeftShoulder" type="PinJoint2D" parent="." unique_id=1696843357]
+position = Vector2(-6, 1)
+node_a = NodePath("..")
+node_b = NodePath("../LeftArm")
+bias = 0.9
+
+[node name="RightShoulder" type="PinJoint2D" parent="." unique_id=1367192478]
+position = Vector2(6, 1)
+node_a = NodePath("..")
+node_b = NodePath("../RightArm")
+bias = 0.9
+
+[node name="LeftArm" type="RigidBody2D" parent="." unique_id=2135114819]
+position = Vector2(-6, 1)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+angular_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftArm" unique_id=456540172]
+position = Vector2(8, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_m3mp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArm" unique_id=2017259058]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_wdjl8")
+
+[node name="RightArm" type="RigidBody2D" parent="." unique_id=948248068]
+position = Vector2(6, 1)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+angular_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RightArm" unique_id=121899102]
+position = Vector2(8, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_m3mp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm" unique_id=1202760812]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_m3mp2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=489728073]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_s84pi")
+animation = &"die"
+autoplay = "idle"
+
+[node name="BodyCollider" type="CollisionShape2D" parent="." unique_id=691440195]
+shape = SubResource("RectangleShape2D_hdm5p")
+
+[node name="LegCollider" type="CollisionShape2D" parent="." unique_id=1562719250]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_wdjl8")
+
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=585184742]
+target_position = Vector2(0, 29)
+
+[node name="LeftRay" type="RayCast2D" parent="." unique_id=1198409485]
+position = Vector2(-6, 0)
+target_position = Vector2(0, 29)
+
+[node name="RightRay" type="RayCast2D" parent="." unique_id=1991474577]
+position = Vector2(6, 0)
+target_position = Vector2(0, 29)
+
+[node name="LeftTarget" type="Marker2D" parent="." unique_id=229376998]
+position = Vector2(-6, 26)
+scale = Vector2(0.5, 0.5)
+
+[node name="RightTarget" type="Marker2D" parent="." unique_id=1924500377]
+position = Vector2(6, 26)
+scale = Vector2(0.5, 0.5)
