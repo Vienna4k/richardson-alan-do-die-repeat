@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bwmvrptw5s6fn" path="res://assets/2D Resources/tilesets/f_back.png" id="1_cq2ho"]
 [ext_resource type="Texture2D" uid="uid://5iw3mem6tpom" path="res://assets/2D Resources/tilesets/lab tileset finished transparent.png" id="2_kmwpk"]
 [ext_resource type="PackedScene" uid="uid://dcqf853kquja5" path="res://prefabs/f_player.tscn" id="6_isqls"]
+[ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="6_px8o5"]
 [ext_resource type="PackedScene" uid="uid://dmpdjq1hngkxc" path="res://prefabs/exit_area.tscn" id="7_acgkv"]
 [ext_resource type="PackedScene" uid="uid://p5v61mtd5ymm" path="res://scenes/main_menu.tscn" id="8_et36h"]
 
@@ -479,6 +480,9 @@ sources/1 = SubResource("TileSetAtlasSource_u563m")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u563m"]
 size = Vector2(163, 64)
 
+[sub_resource type="LabelSettings" id="LabelSettings_4ajvf"]
+font = ExtResource("6_px8o5")
+
 [node name="Final-Level01" type="Node2D" unique_id=402310896]
 
 [node name="BG" type="Node2D" parent="." unique_id=1301598992]
@@ -533,3 +537,13 @@ next_scene = ExtResource("8_et36h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1497759195]
 position = Vector2(145.5, 22)
 shape = SubResource("RectangleShape2D_u563m")
+
+[node name="Label" type="Label" parent="." unique_id=1657121242]
+offset_left = 176.0
+offset_top = 848.0
+offset_right = 290.0
+offset_bottom = 902.0
+text = "Test 
+Chamber
+03"
+label_settings = SubResource("LabelSettings_4ajvf")

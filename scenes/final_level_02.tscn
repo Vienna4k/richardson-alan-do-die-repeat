@@ -562,6 +562,9 @@ size = Vector2(141, 297)
 [sub_resource type="LabelSettings" id="LabelSettings_f7ffr"]
 font = ExtResource("7_kpcmt")
 
+[sub_resource type="LabelSettings" id="LabelSettings_30new"]
+font = ExtResource("7_kpcmt")
+
 [node name="Final-Level02" type="Node2D" unique_id=402310896]
 
 [node name="BG" type="Node2D" parent="." unique_id=1672258063]
@@ -651,3 +654,13 @@ offset_bottom = 869.0
 text = "Go back to spawn
 and keep walking"
 label_settings = SubResource("LabelSettings_f7ffr")
+
+[node name="Label2" type="Label" parent="." unique_id=1657367184]
+offset_left = 176.0
+offset_top = 848.0
+offset_right = 290.0
+offset_bottom = 902.0
+text = "Test 
+Chamber
+02"
+label_settings = SubResource("LabelSettings_30new")

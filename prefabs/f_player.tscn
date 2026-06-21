@@ -287,20 +287,25 @@ animation = &"die"
 autoplay = "idle"
 
 [node name="BodyCollider" type="CollisionShape2D" parent="." unique_id=691440195]
+visible = false
 shape = SubResource("RectangleShape2D_hdm5p")
 
 [node name="LegCollider" type="CollisionShape2D" parent="." unique_id=1562719250]
+visible = false
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_wdjl8")
 
 [node name="FloorRayCast" type="RayCast2D" parent="." unique_id=585184742]
+visible = false
 target_position = Vector2(0, 29)
 
 [node name="LeftRay" type="RayCast2D" parent="." unique_id=1198409485]
+visible = false
 position = Vector2(-6, 0)
 target_position = Vector2(0, 29)
 
 [node name="RightRay" type="RayCast2D" parent="." unique_id=1991474577]
+visible = false
 position = Vector2(6, 0)
 target_position = Vector2(0, 29)
 
