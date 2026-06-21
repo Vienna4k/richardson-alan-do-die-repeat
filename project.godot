@@ -40,6 +40,7 @@ window/size/viewport_height=1080
 coins=""
 players=""
 corpses=""
+spawnpoint=""
 
 [gui]
 

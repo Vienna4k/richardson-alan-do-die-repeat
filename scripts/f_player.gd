@@ -113,10 +113,24 @@ func die() -> void:
 	# Wait a bit so the player gets to stare at their failure
 	await get_tree().create_timer(1.0).timeout
 	
-	# Instantiate a completely new player at the last spawn position!
-	var player_scene: PackedScene = load("res://prefabs/f_player.tscn") as PackedScene
+	# Instantiate a completely new player
+	var player_scene: PackedScene = preload("res://prefabs/f_player.tscn") as PackedScene
 	var new_player: FPlayer = player_scene.instantiate() as FPlayer
-	new_player.global_position = spawn_position
+	
+	# Check the scene for a dedicated SpawnPoint node
+	var spawn_points: Array[Node] = get_tree().get_nodes_in_group("spawnpoint")
+	
+	if spawn_points.size() > 0:
+		# Cast the generic Node to a Marker2D so the compiler knows it has a global_position
+		var marker: Marker2D = spawn_points[0] as Marker2D
+		
+		if marker:
+			new_player.global_position = marker.global_position
+		else:
+			new_player.global_position = spawn_position # Fallback if cast fails
+	else:
+		# Fallback if no spawn points exist
+		new_player.global_position = spawn_position
 	
 	# Move the camera from the old body to the new one smoothly!
 	var camera: Camera2D = null
@@ -191,7 +205,7 @@ func _physics_process(delta: float) -> void:
 			
 			# Arm / carry logic
 			if carried_corpse:
-				carried_corpse.global_position = global_position + Vector2(0, -20)
+				carried_corpse.global_position = global_position + Vector2(20, 0)
 				
 				# Lock arms and point them at the corpse
 				left_arm.freeze = true
@@ -206,7 +220,7 @@ func _physics_process(delta: float) -> void:
 				if Input.is_action_just_pressed("pickup"):
 					carried_corpse.is_carried = false
 					# Restore collisions so it hits the floor and can be stepped on!
-					carried_corpse.collision_layer = 6
+					carried_corpse.collision_layer = collision_layer | 6
 					carried_corpse.collision_mask = 1 # (Assuming your floor is on Mask 1)
 					carried_corpse = null
 					
