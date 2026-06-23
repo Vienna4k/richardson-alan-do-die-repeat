@@ -20,7 +20,7 @@ buses/default_bus_layout="uid://jtjf841jshxv"
 
 [autoload]
 
-Bgm="uid://clyrbh7nte36i"
+Bgm="*uid://bta42cn3s80if"
 
 [debug]
 
@@ -41,6 +41,7 @@ coins=""
 players=""
 corpses=""
 spawnpoint=""
+game_manager=""
 
 [gui]
 

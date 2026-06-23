@@ -102,19 +102,26 @@ func die() -> void:
 	var skeleton := get_node_or_null("Skeleton2D") as Skeleton2D
 	if skeleton: skeleton.hide()
 	
-	# Destroy the invisible stilts holding the body up, making the corpse plummet to the floor!
+
 	var stilts := get_node_or_null("LegCollider") as CollisionShape2D
 	if stilts: stilts.queue_free()
 	
-	# Fix the collision layer! Make sure the dead body exists on Layers 2 and 3
-	# so that the next player's raycasts and leg collisions detect it as ground!
 	collision_layer |= 6 
 	
 	# Wait a bit so the player gets to stare at their failure
 	await get_tree().create_timer(1.0).timeout
+
+	var gm: GameManager = get_tree().get_first_node_in_group("game_manager") as GameManager
+	
+	gm.register_death()
+	
+	# If we are out of lives, abort the respawn process!
+	if gm.current_deaths <= 0:
+		print("loser")
+		return
 	
 	# Instantiate a completely new player
-	var player_scene: PackedScene = preload("res://prefabs/f_player.tscn") as PackedScene
+	var player_scene: PackedScene = load("res://prefabs/f_player.tscn") as PackedScene
 	var new_player: FPlayer = player_scene.instantiate() as FPlayer
 	
 	# Check the scene for a dedicated SpawnPoint node

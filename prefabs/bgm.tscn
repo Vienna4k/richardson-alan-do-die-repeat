@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bta42cn3s80if"]
+
+[ext_resource type="AudioStream" uid="uid://ietrhshe4diu" path="res://assets/2D Resources/music/DDRMusic.wav" id="1_e1v7t"]
+
+[node name="BGM" type="Node" unique_id=1638881317]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1987161186]
+stream = ExtResource("1_e1v7t")
+autoplay = true
+bus = &"Music"

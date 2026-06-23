@@ -21,10 +21,10 @@ script = ExtResource("1_bqqt6")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1226438110]
 layout_mode = 0
-offset_left = -618.0
-offset_top = -92.0
-offset_right = 2623.0
-offset_bottom = 1526.0
+offset_left = -906.0
+offset_top = -489.0
+offset_right = 2924.0
+offset_bottom = 1831.0
 texture = ExtResource("2_bqqt6")
 
 [node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1221271021]
