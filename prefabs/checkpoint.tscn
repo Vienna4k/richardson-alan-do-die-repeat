@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ceo6t6428dmfs"]
+
+[ext_resource type="Script" uid="uid://cnfcyt48smb72" path="res://scripts/checkpoint.gd" id="1_jmy7n"]
+[ext_resource type="Texture2D" uid="uid://bhrk5au8k2ifv" path="res://assets/2D Resources/tilesets/RespawnChamber.png" id="1_xsm40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmy7n"]
+size = Vector2(34, 50)
+
+[node name="Checkpoint" type="Area2D" unique_id=1122413092 groups=["spawnpoint"]]
+script = ExtResource("1_jmy7n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483757360]
+position = Vector2(1, -1)
+scale = Vector2(1.0625, 1.0416666)
+texture = ExtResource("1_xsm40")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1053506117]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_jmy7n")

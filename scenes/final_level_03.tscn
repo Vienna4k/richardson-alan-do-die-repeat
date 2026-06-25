@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="8_cq2ho"]
 [ext_resource type="PackedScene" uid="uid://p5v61mtd5ymm" path="res://scenes/main_menu.tscn" id="8_et36h"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="9_kmwpk"]
+[ext_resource type="PackedScene" uid="uid://ceo6t6428dmfs" path="res://prefabs/checkpoint.tscn" id="10_kmwpk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ajvf"]
 texture = ExtResource("1_cq2ho")
@@ -530,19 +531,8 @@ tile_set = SubResource("TileSet_gqbav")
 
 [node name="Interactables" type="Node2D" parent="." unique_id=1445266196]
 
-[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("6_isqls")]
-position = Vector2(94, 463)
-
-[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
-zoom = Vector2(4, 4)
-limit_left = 0
-limit_top = 641
-limit_right = 1984
-limit_bottom = 1059
-position_smoothing_enabled = true
-
-[node name="spawnpoint" type="Marker2D" parent="." unique_id=1261473464 groups=["spawnpoint"]]
-position = Vector2(94, 895)
+[node name="Checkpoint" parent="." unique_id=1122413092 instance=ExtResource("10_kmwpk")]
+position = Vector2(94, 904)
 
 [node name="Hazards" type="Node2D" parent="." unique_id=2113524661]
 
@@ -642,3 +632,14 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_px8o5")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
+
+[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("6_isqls")]
+position = Vector2(94, 463)
+
+[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 641
+limit_right = 1984
+limit_bottom = 1059
+position_smoothing_enabled = true

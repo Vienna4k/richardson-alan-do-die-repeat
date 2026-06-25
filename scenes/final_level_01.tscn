@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dcqf853kquja5" path="res://prefabs/f_player.tscn" id="3_rofil"]
 [ext_resource type="PackedScene" uid="uid://d2jpmeakxmopl" path="res://prefabs/button.tscn" id="4_iivtx"]
 [ext_resource type="PackedScene" uid="uid://ciw8cemuy37yv" path="res://prefabs/door.tscn" id="5_37o0v"]
+[ext_resource type="PackedScene" uid="uid://ceo6t6428dmfs" path="res://prefabs/checkpoint.tscn" id="6_cd7xb"]
 [ext_resource type="Texture2D" uid="uid://ql8nwpy62l3h" path="res://assets/2D Resources/tilesets/Door-Sheet.png" id="6_kx36b"]
 [ext_resource type="PackedScene" uid="uid://dmpdjq1hngkxc" path="res://prefabs/exit_area.tscn" id="7_tphk1"]
 [ext_resource type="PackedScene" uid="uid://doi8valqmcble" path="res://scenes/final_level_02.tscn" id="8_u563m"]
@@ -386,16 +387,8 @@ position = Vector2(1435, 800)
 position = Vector2(715, 800)
 channel = 1
 
-[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("3_rofil")]
-position = Vector2(64, 899)
-
-[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
-zoom = Vector2(4, 4)
-limit_left = 0
-limit_top = 768
-limit_right = 1984
-limit_bottom = 1007
-position_smoothing_enabled = true
+[node name="Checkpoint" parent="." unique_id=1122413092 instance=ExtResource("6_cd7xb")]
+position = Vector2(148, 904)
 
 [node name="EntryDoor" type="StaticBody2D" parent="." unique_id=748325654]
 position = Vector2(16, 864)
@@ -414,9 +407,6 @@ next_scene = ExtResource("8_u563m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1497759195]
 position = Vector2(145.5, 22)
 shape = SubResource("RectangleShape2D_u563m")
-
-[node name="spawnpoint" type="Marker2D" parent="." unique_id=1315893615 groups=["spawnpoint"]]
-position = Vector2(88, 904)
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
 script = ExtResource("10_iy3k3")
@@ -491,6 +481,17 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("9_ghvsb")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
+
+[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("3_rofil")]
+position = Vector2(64, 899)
+
+[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 768
+limit_right = 1984
+limit_bottom = 1007
+position_smoothing_enabled = true
 
 [connection signal="button_pressed" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_pressed"]
 [connection signal="button_released" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_released"]
