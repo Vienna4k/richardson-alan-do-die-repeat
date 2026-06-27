@@ -317,11 +317,11 @@ sources/1 = SubResource("TileSetAtlasSource_u563m")
 [sub_resource type="LabelSettings" id="LabelSettings_3fy12"]
 font = ExtResource("9_ghvsb")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx36b"]
-size = Vector2(32, 128)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u563m"]
 size = Vector2(163, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx36b"]
+size = Vector2(32, 128)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cd7xb"]
 font = ExtResource("9_ghvsb")
@@ -389,6 +389,26 @@ channel = 1
 
 [node name="Checkpoint" parent="." unique_id=1122413092 instance=ExtResource("6_cd7xb")]
 position = Vector2(148, 904)
+script = null
+
+[node name="ExitArea" parent="." unique_id=163354526 instance=ExtResource("7_tphk1")]
+position = Vector2(1951, 874)
+next_scene = ExtResource("8_u563m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1497759195]
+position = Vector2(145.5, 22)
+shape = SubResource("RectangleShape2D_u563m")
+
+[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("3_rofil")]
+position = Vector2(64, 899)
+
+[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 768
+limit_right = 1984
+limit_bottom = 1007
+position_smoothing_enabled = true
 
 [node name="EntryDoor" type="StaticBody2D" parent="." unique_id=748325654]
 position = Vector2(16, 864)
@@ -399,14 +419,6 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntryDoor" unique_id=1791503013]
 shape = SubResource("RectangleShape2D_kx36b")
-
-[node name="ExitArea" parent="." unique_id=163354526 instance=ExtResource("7_tphk1")]
-position = Vector2(1951, 874)
-next_scene = ExtResource("8_u563m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1497759195]
-position = Vector2(145.5, 22)
-shape = SubResource("RectangleShape2D_u563m")
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
 script = ExtResource("10_iy3k3")
@@ -481,17 +493,6 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("9_ghvsb")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
-
-[node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("3_rofil")]
-position = Vector2(64, 899)
-
-[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
-zoom = Vector2(4, 4)
-limit_left = 0
-limit_top = 768
-limit_right = 1984
-limit_bottom = 1007
-position_smoothing_enabled = true
 
 [connection signal="button_pressed" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_pressed"]
 [connection signal="button_released" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_released"]

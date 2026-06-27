@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cnsetdsacsgg6" path="res://scripts/f_player.gd" id="1_hdm5p"]
 [ext_resource type="Texture2D" uid="uid://vmsdy05jf1ob" path="res://assets/2D Resources/characters/Leg.png" id="4_m3mp2"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="4_wdjl8"]
+[ext_resource type="AudioStream" uid="uid://dddu1qxv8t8jr" path="res://assets/2D Resources/sounds/death.mp3" id="5_m3mp2"]
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_wdjl8"]
 target_nodepath = NodePath("../LeftTarget")
@@ -316,3 +317,9 @@ scale = Vector2(0.5, 0.5)
 [node name="RightTarget" type="Marker2D" parent="." unique_id=1924500377]
 position = Vector2(6, 26)
 scale = Vector2(0.5, 0.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1956796616]
+stream = ExtResource("5_m3mp2")
+volume_db = -2.0
+pitch_scale = 1.5
+bus = &"SFX"

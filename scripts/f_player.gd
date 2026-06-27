@@ -2,6 +2,7 @@ class_name FPlayer
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_sound: AudioStreamPlayer = $AudioStreamPlayer
 
 # IK Targets and RayCasts
 @onready var left_target: Node2D = $LeftTarget
@@ -97,6 +98,8 @@ func die() -> void:
 	
 	# Close eyes for the corpse
 	animated_sprite.play("die")
+	death_sound.play()
+
 	
 	# Hide the IK legs so it's just a dead block body
 	var skeleton := get_node_or_null("Skeleton2D") as Skeleton2D

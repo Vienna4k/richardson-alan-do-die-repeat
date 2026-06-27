@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmy7n"]
 size = Vector2(34, 50)
 
-[node name="Checkpoint" type="Area2D" unique_id=1122413092 groups=["spawnpoint"]]
+[node name="Checkpoint" type="Marker2D" unique_id=1819830404 groups=["spawnpoint"]]
 script = ExtResource("1_jmy7n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483757360]
@@ -14,6 +14,8 @@ position = Vector2(1, -1)
 scale = Vector2(1.0625, 1.0416666)
 texture = ExtResource("1_xsm40")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1053506117]
+[node name="Area2D" type="Area2D" parent="." unique_id=383307647]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1053506117]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_jmy7n")
