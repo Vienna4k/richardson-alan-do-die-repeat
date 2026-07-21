@@ -630,10 +630,11 @@ label_settings = SubResource("LabelSettings_30new")
 
 [node name="Button" parent="Interactables" unique_id=916747425 instance=ExtResource("5_53ot0")]
 position = Vector2(1690, 1176)
+channel = Array[int]([0])
 
 [node name="Button2" parent="Interactables" unique_id=1595960979 instance=ExtResource("5_53ot0")]
 position = Vector2(346, 1208)
-channel = 1
+channel = Array[int]([1])
 
 [node name="Door" parent="Interactables" unique_id=1223700433 instance=ExtResource("6_lsg4q")]
 position = Vector2(1487, 800)
@@ -648,9 +649,8 @@ channel = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Interactables/MovingPlatform" unique_id=1471396027]
 libraries/ = SubResource("AnimationLibrary_30new")
 
-[node name="Checkpoint" parent="." unique_id=1122413092 instance=ExtResource("10_f1rc4")]
-position = Vector2(94, 904)
-script = null
+[node name="Checkpoint" parent="." unique_id=1819830404 instance=ExtResource("10_f1rc4")]
+position = Vector2(116, 904)
 
 [node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("4_ucrpd")]
 position = Vector2(-94, 899)

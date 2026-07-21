@@ -373,23 +373,32 @@ label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Interactables" type="Node2D" parent="." unique_id=1445266196]
 
-[node name="Button" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
-position = Vector2(1350, 920)
+[node name="Button3" parent="Interactables" unique_id=251122345 instance=ExtResource("4_iivtx")]
+position = Vector2(1267, 920)
+channel = Array[int]([2])
 
-[node name="Button2" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
+[node name="Button2" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
+position = Vector2(902, 920)
+channel = Array[int]([1, 0])
+
+[node name="Button1" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
 position = Vector2(538, 920)
+channel = Array[int]([0])
+
+[node name="Door3" parent="Interactables" unique_id=1166924423 instance=ExtResource("5_37o0v")]
+position = Vector2(1378, 800)
+channel = 2
+
+[node name="Door2" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
+position = Vector2(987, 800)
 channel = 1
 
-[node name="Door" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
-position = Vector2(1435, 800)
-
-[node name="Door2" parent="Interactables" unique_id=699766173 instance=ExtResource("5_37o0v")]
+[node name="Door" parent="Interactables" unique_id=699766173 instance=ExtResource("5_37o0v")]
 position = Vector2(715, 800)
-channel = 1
+gateType = 3
 
-[node name="Checkpoint" parent="." unique_id=1122413092 instance=ExtResource("6_cd7xb")]
-position = Vector2(148, 904)
-script = null
+[node name="Checkpoint" parent="." unique_id=1819830404 instance=ExtResource("6_cd7xb")]
+position = Vector2(138, 904)
 
 [node name="ExitArea" parent="." unique_id=163354526 instance=ExtResource("7_tphk1")]
 position = Vector2(1951, 874)
@@ -422,7 +431,6 @@ shape = SubResource("RectangleShape2D_kx36b")
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
 script = ExtResource("10_iy3k3")
-max_deaths = 4
 death_label = NodePath("../UIManager/Death/Count")
 game_over_screen = NodePath("../UIManager/GameOver")
 restart_button = NodePath("../UIManager/GameOver/RestartButton")
@@ -494,7 +502,9 @@ theme_override_fonts/font = ExtResource("9_ghvsb")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
 
-[connection signal="button_pressed" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_pressed"]
-[connection signal="button_released" from="Interactables/Button" to="Interactables/Door" method="_on_button_button_released"]
-[connection signal="button_pressed" from="Interactables/Button2" to="Interactables/Door" method="_on_button_button_pressed"]
-[connection signal="button_released" from="Interactables/Button2" to="Interactables/Door" method="_on_button_button_released"]
+[connection signal="button_pressed" from="Interactables/Button3" to="Interactables/Door2" method="_on_button_button_pressed"]
+[connection signal="button_released" from="Interactables/Button3" to="Interactables/Door2" method="_on_button_button_released"]
+[connection signal="button_pressed" from="Interactables/Button2" to="Interactables/Door2" method="_on_button_button_pressed"]
+[connection signal="button_released" from="Interactables/Button2" to="Interactables/Door2" method="_on_button_button_released"]
+[connection signal="button_pressed" from="Interactables/Button1" to="Interactables/Door2" method="_on_button_button_pressed"]
+[connection signal="button_released" from="Interactables/Button1" to="Interactables/Door2" method="_on_button_button_released"]

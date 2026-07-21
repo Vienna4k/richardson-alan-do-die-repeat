@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ceo6t6428dmfs"]
 
-[ext_resource type="Script" uid="uid://cnfcyt48smb72" path="res://scripts/checkpoint.gd" id="1_jmy7n"]
+[ext_resource type="Script" uid="uid://utkyscs6o42b" path="res://scripts/checkpoint.gd" id="1_jmy7n"]
 [ext_resource type="Texture2D" uid="uid://bhrk5au8k2ifv" path="res://assets/2D Resources/tilesets/RespawnChamber.png" id="1_xsm40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmy7n"]
@@ -15,7 +15,11 @@ scale = Vector2(1.0625, 1.0416666)
 texture = ExtResource("1_xsm40")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=383307647]
+collision_layer = 255
+collision_mask = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1053506117]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_jmy7n")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

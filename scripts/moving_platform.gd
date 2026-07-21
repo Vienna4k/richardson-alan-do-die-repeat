@@ -7,7 +7,7 @@ func _ready() -> void:
 	var buttons: Array[Node] = get_tree().get_nodes_in_group("buttons")
 	for node in buttons:
 		var my_button: GameButton = node as GameButton
-		if my_button.channel == channel:
+		if channel in my_button.channel:
 			var pressed_sig: Signal = my_button.button_pressed
 			var released_sig: Signal = my_button.button_released
 			

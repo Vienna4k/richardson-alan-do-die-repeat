@@ -1,5 +1,6 @@
-class_name FPlayer
+
 extends CharacterBody2D
+class_name FPlayer
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer = $AudioStreamPlayer
@@ -46,6 +47,9 @@ const DEATH_CHARGE_MAX: float = 1.0 # Requires holding the key for 1 second
 var carried_corpse: FPlayer = null
 var is_carried: bool = false
 
+@onready var spawn_points: Array[Checkpoint] = []
+var currentCheckpoint: Checkpoint
+
 func _ready() -> void:
 	add_to_group("players") # Ensure the main body triggers buttons!
 	spawn_position = global_position # Save our initial spawn point
@@ -68,6 +72,12 @@ func _ready() -> void:
 			var cam := child as Camera2D
 			cam.reset_smoothing()
 			break
+	
+	for node in get_tree().get_nodes_in_group("spawnpoint"):
+		if node is Checkpoint:
+			spawn_points.append(node)
+	
+	currentCheckpoint = spawn_points[0]
 
 func _start_blink_timer() -> void:
 	var wait_time: float = randf_range(5.0, 20.0)
@@ -127,15 +137,15 @@ func die() -> void:
 	var player_scene: PackedScene = load("res://prefabs/f_player.tscn") as PackedScene
 	var new_player: FPlayer = player_scene.instantiate() as FPlayer
 	
-	# Check the scene for a dedicated SpawnPoint node
-	var spawn_points: Array[Node] = get_tree().get_nodes_in_group("spawnpoint")
-	
 	if spawn_points.size() > 0:
 		# Cast the generic Node to a Marker2D so the compiler knows it has a global_position
-		var marker: Marker2D = spawn_points[0] as Marker2D
+
+		for checkpoint in spawn_points:
+			if checkpoint.isMostRecentCheckpoint:
+				currentCheckpoint = checkpoint
 		
-		if marker:
-			new_player.global_position = marker.global_position
+		if currentCheckpoint:
+			new_player.global_position = currentCheckpoint.global_position
 		else:
 			new_player.global_position = spawn_position # Fallback if cast fails
 	else:
@@ -164,6 +174,14 @@ func die() -> void:
 			
 	# Safely add the new player to the game world during physics processing
 	get_parent().call_deferred("add_child", new_player)
+
+func setNewCheckpoint(node: Checkpoint) -> void:
+	for _checkpoint in spawn_points:
+		_checkpoint.isMostRecentCheckpoint = false
+	
+	node.isMostRecentCheckpoint = true
+
+	print("ran new checkpoint function")
 
 func _physics_process(delta: float) -> void:
 	if is_dead:

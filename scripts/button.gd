@@ -5,7 +5,7 @@ extends Area2D
 signal button_pressed(channel: int)
 signal button_released(channel: int)
 
-@export var channel : int = 0
+@export var channel : Array[int] = []
 
 @onready var button_anim : AnimationPlayer = $AnimationPlayer
 
@@ -23,7 +23,8 @@ func _on_body_entered(body: Node2D) -> void:
 		if not is_pressed:
 			is_pressed = true
 			button_anim.play("press_down")
-			button_pressed.emit(channel) # Send a signal out to your Portal or GameManager
+			for ch in channel:
+				button_pressed.emit(ch) # Send a signal out to your Portal or GameManager
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("players"):
@@ -32,5 +33,6 @@ func _on_body_exited(body: Node2D) -> void:
 		if get_overlapping_bodies().filter(func(b: Node2D) -> bool: return (b.is_in_group("players") or b.is_in_group("Player")) and b != body).is_empty():
 			is_pressed = false
 			button_anim.play_backwards("press_down") # Or play a separate "release" animation
-			button_released.emit(channel)
+			for ch in channel:
+				button_released.emit(ch)
 
