@@ -5,6 +5,8 @@ enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 
 @export var channel : int = 0
 @onready var move_anim : AnimationPlayer = $AnimationPlayer
+@onready var  powerUp : AudioStreamPlayer = $PowerUp
+@onready var  powerDown : AudioStreamPlayer = $PowerDown
 
 var isMoving : bool = false
 var connected_buttons: Array[GameButton] = []
@@ -54,9 +56,11 @@ func evaluate_gate() -> void:
 	if is_condition_met and not isMoving:
 		move_anim.play("move")
 		isMoving = true
+		powerUp.play()
 	elif not is_condition_met and isMoving:
 		move_anim.pause()
 		isMoving = false
+		powerDown.play()
 
 func _on_button_pressed(_button_channel: int) -> void:
 	evaluate_gate()
