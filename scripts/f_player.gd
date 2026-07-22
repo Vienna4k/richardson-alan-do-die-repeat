@@ -134,8 +134,8 @@ func die() -> void:
 		return
 	
 	# Instantiate a completely new player
-	var player_scene: PackedScene = load("res://prefabs/f_player.tscn") as PackedScene
-	var new_player: FPlayer = player_scene.instantiate() as FPlayer
+	var player_scene : PackedScene = load("res://prefabs/f_player.tscn")
+	var new_player : FPlayer = player_scene.instantiate() as FPlayer
 	
 	if spawn_points.size() > 0:
 		# Cast the generic Node to a Marker2D so the compiler knows it has a global_position

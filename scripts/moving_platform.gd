@@ -2,6 +2,7 @@ extends AnimatableBody2D
 
 enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 @export var gateType : GateType
+@export var isPingPlat : bool = false
 
 @export var channel : int = 0
 @onready var move_anim : AnimationPlayer = $AnimationPlayer
@@ -53,14 +54,20 @@ func evaluate_gate() -> void:
 		GateType.Nand:
 			is_condition_met = total_buttons_pressed < total_buttons
 
-	if is_condition_met and not isMoving:
-		move_anim.play("move")
-		isMoving = true
-		powerUp.play()
-	elif not is_condition_met and isMoving:
-		move_anim.pause()
-		isMoving = false
-		powerDown.play()
+	if !isPingPlat:
+		if is_condition_met && !isMoving:
+			move_anim.play("move")
+			isMoving = true
+			powerUp.play()
+		elif !is_condition_met && isMoving:
+			move_anim.pause()
+			isMoving = false
+			powerDown.play()
+	elif isPingPlat:
+		if is_condition_met && !isMoving:
+			move_anim.play("move")
+		elif !is_condition_met && isMoving:
+			move_anim.play_backwards("move")
 
 func _on_button_pressed(_button_channel: int) -> void:
 	evaluate_gate()

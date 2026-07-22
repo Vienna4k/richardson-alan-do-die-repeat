@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://doi8valqmcble" path="res://scenes/final_level_02.tscn" id="8_c3gf8"]
 [ext_resource type="PackedScene" uid="uid://dcqf853kquja5" path="res://prefabs/f_player.tscn" id="9_nxacq"]
 [ext_resource type="PackedScene" uid="uid://ddxdsumvneooj" path="res://prefabs/moving_platform.tscn" id="10_g3a2j"]
+[ext_resource type="PackedScene" uid="uid://d2jpmeakxmopl" path="res://prefabs/button.tscn" id="11_2cfjf"]
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="11_w3csu"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="12_0wyaj"]
 
@@ -667,6 +668,27 @@ font_size = 60
 font = ExtResource("3_0w3wa")
 font_size = 120
 
+[sub_resource type="Animation" id="Animation_g3a2j"]
+resource_name = "move"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(367.5, 944), Vector2(368, -80)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cfjf"]
+_data = {
+&"move": SubResource("Animation_g3a2j")
+}
+
 [node name="Final-Level01" type="Node2D" unique_id=402310896]
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
@@ -794,3 +816,11 @@ text = "Restart"
 
 [node name="MovingPlatform" parent="." unique_id=5983034 instance=ExtResource("10_g3a2j")]
 position = Vector2(367.5, 944)
+isPingPlat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform" unique_id=2059056588]
+libraries/ = SubResource("AnimationLibrary_2cfjf")
+
+[node name="Button" parent="MovingPlatform" unique_id=916747425 instance=ExtResource("11_2cfjf")]
+position = Vector2(32.5, -18)
+channel = Array[int]([0])

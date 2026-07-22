@@ -24,6 +24,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
+
 func register_death() -> void:
 	current_deaths -= 1
 	update_ui()
