@@ -10,6 +10,7 @@ enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 @onready var  powerDown : AudioStreamPlayer = $PowerDown
 
 var isMoving : bool = false
+var hasActivated : bool = false
 var connected_buttons: Array[GameButton] = []
 
 func _ready() -> void:
@@ -64,9 +65,14 @@ func evaluate_gate() -> void:
 			isMoving = false
 			powerDown.play()
 	elif isPingPlat:
-		if is_condition_met && !isMoving:
+		if is_condition_met and !isMoving:
 			move_anim.play("move")
-		elif !is_condition_met && isMoving:
+			isMoving = true
+			hasActivated = true
+		elif !is_condition_met and isMoving:
+			move_anim.play_backwards("move")
+			isMoving = false
+		elif !is_condition_met and !isMoving and hasActivated:
 			move_anim.play_backwards("move")
 
 func _on_button_pressed(_button_channel: int) -> void:
