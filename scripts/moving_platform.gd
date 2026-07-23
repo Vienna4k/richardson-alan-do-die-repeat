@@ -69,11 +69,14 @@ func evaluate_gate() -> void:
 			move_anim.play("move")
 			isMoving = true
 			hasActivated = true
+			powerUp.play()
 		elif !is_condition_met and isMoving:
 			move_anim.play_backwards("move")
 			isMoving = false
+			powerDown.play()
 		elif !is_condition_met and !isMoving and hasActivated:
 			move_anim.play_backwards("move")
+			powerDown.play()
 
 func _on_button_pressed(_button_channel: int) -> void:
 	evaluate_gate()
