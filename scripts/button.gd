@@ -35,4 +35,3 @@ func _on_body_exited(body: Node2D) -> void:
 			button_anim.play_backwards("press_down") # Or play a separate "release" animation
 			for ch in channel:
 				button_released.emit(ch)
-
