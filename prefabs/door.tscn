@@ -65,8 +65,10 @@ libraries/ = SubResource("AnimationLibrary_qfj2i")
 
 [node name="DoorOpen" type="AudioStreamPlayer" parent="." unique_id=825660760]
 stream = ExtResource("3_iv2is")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="DoorClose" type="AudioStreamPlayer" parent="." unique_id=409126785]
 stream = ExtResource("4_08et4")
+volume_db = -5.0
 bus = &"SFX"

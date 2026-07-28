@@ -100,7 +100,7 @@ _data = {
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_s5sk6")
-channel = Array[int]([0, 0])
+channel = Array[int]([0])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=242272921]
 texture = ExtResource("2_f40y1")
