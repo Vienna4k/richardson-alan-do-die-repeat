@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dr470fng0x223" path="res://assets/2D Resources/sounds/PowerDown.wav" id="4_dnns3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhu3f"]
-size = Vector2(98, 32)
+size = Vector2(97, 32)
 
 [node name="MovingPlatform" type="AnimatableBody2D" unique_id=5983034]
 script = ExtResource("1_mn0pp")

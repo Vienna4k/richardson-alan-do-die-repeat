@@ -383,7 +383,6 @@ channel = Array[int]([1, 0])
 
 [node name="Button1" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
 position = Vector2(538, 920)
-channel = Array[int]([0])
 
 [node name="Door3" parent="Interactables" unique_id=1166924423 instance=ExtResource("5_37o0v")]
 position = Vector2(1378, 800)
