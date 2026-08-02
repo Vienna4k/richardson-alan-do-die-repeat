@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dtatud2mfxpor"]
 
 [ext_resource type="Texture2D" uid="uid://bwmvrptw5s6fn" path="res://assets/2D Resources/tilesets/f_back.png" id="1_iivtx"]
+[ext_resource type="Texture2D" uid="uid://di8yxfurcat4p" path="res://assets/2D Resources/tilesets/Wiring.png" id="2_33qst"]
 [ext_resource type="Texture2D" uid="uid://5iw3mem6tpom" path="res://assets/2D Resources/tilesets/lab tileset finished transparent.png" id="2_iivtx"]
 [ext_resource type="PackedScene" uid="uid://dcqf853kquja5" path="res://prefabs/f_player.tscn" id="3_rofil"]
 [ext_resource type="PackedScene" uid="uid://d2jpmeakxmopl" path="res://prefabs/button.tscn" id="4_iivtx"]
@@ -12,6 +13,42 @@
 [ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="9_ghvsb"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="10_3fy12"]
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="10_iy3k3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33qst"]
+texture = ExtResource("2_33qst")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+8:0/0 = 0
+10:0/0 = 0
+12:0/0 = 0
+14:0/0 = 0
+16:0/0 = 0
+18:0/0 = 0
+18:2/0 = 0
+16:2/0 = 0
+14:2/0 = 0
+12:2/0 = 0
+10:2/0 = 0
+8:2/0 = 0
+6:2/0 = 0
+4:2/0 = 0
+2:2/0 = 0
+0:2/0 = 0
+19:1/0 = 0
+20:0/0 = 0
+21:1/0 = 0
+20:2/0 = 0
+21:3/0 = 0
+19:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_yrape"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "channel_id"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_33qst")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u563m"]
 texture = ExtResource("2_iivtx")
@@ -307,6 +344,26 @@ texture_region_size = Vector2i(32, 32)
 11:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:3/0 = 0
 13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+13:12/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+20:12/0 = 0
+21:12/0 = 0
+22:12/0 = 0
+22:13/0 = 0
+21:13/0 = 0
+20:13/0 = 0
+19:13/0 = 0
+18:13/0 = 0
+17:13/0 = 0
+16:13/0 = 0
+15:13/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_gqbav"]
 tile_size = Vector2i(32, 32)
@@ -333,6 +390,12 @@ font_size = 120
 
 [node name="Final-Level01" type="Node2D" unique_id=402310896]
 
+[node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
+script = ExtResource("10_iy3k3")
+death_label = NodePath("../UIManager/Death/Count")
+game_over_screen = NodePath("../UIManager/GameOver")
+restart_button = NodePath("../UIManager/GameOver/RestartButton")
+
 [node name="BG" type="Node2D" parent="." unique_id=1301598992]
 
 [node name="Back" type="Sprite2D" parent="BG" unique_id=2079340299]
@@ -355,6 +418,20 @@ position = Vector2(2240, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_iivtx")
 
+[node name="Wiring" type="Node2D" parent="." unique_id=645224535]
+
+[node name="WiringChannel0" type="TileMapLayer" parent="Wiring" unique_id=834544397]
+tile_map_data = PackedByteArray("AAAQABwAAAACAAIAAAAQABsAAAACAAIAAAAQABoAAAACAAIAAAAQABkAAAAQAAIAAAARABkAAAAAAAIAAAASABkAAAAAAAIAAAATABkAAAAAAAIAAAAUABkAAAAAAAIAAAAVABkAAAASAAIAAAA=")
+tile_set = SubResource("TileSet_yrape")
+
+[node name="WiringChannel1" type="TileMapLayer" parent="Wiring" unique_id=1731961944]
+tile_map_data = PackedByteArray("AAAcABwAAAACAAIAAAAcABsAAAACAAIAAAAcABoAAAACAAIAAAAcABkAAAAGAAIAAAAdABkAAAASAAIAAAAbABkAAAAAAAIAAAAaABkAAAAAAAIAAAAZABkAAAAAAAIAAAAYABkAAAAAAAIAAAAXABkAAAATAAMAAAA=")
+tile_set = SubResource("TileSet_yrape")
+
+[node name="WiringChannel2" type="TileMapLayer" parent="Wiring" unique_id=2072383169]
+tile_map_data = PackedByteArray("AAAnABwAAAACAAIAAAAnABsAAAACAAIAAAAnABoAAAACAAIAAAAnABkAAAAQAAIAAAAoABkAAAAAAAIAAAApABkAAAAAAAIAAAAqABkAAAASAAIAAAA=")
+tile_set = SubResource("TileSet_yrape")
+
 [node name="Tilesets" type="Node2D" parent="." unique_id=2053834606]
 
 [node name="Middle" type="TileMapLayer" parent="Tilesets" unique_id=607036014]
@@ -375,26 +452,28 @@ label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Button3" parent="Interactables" unique_id=251122345 instance=ExtResource("4_iivtx")]
 position = Vector2(1267, 920)
-channel = Array[int]([2])
+channel = 2
 
 [node name="Button2" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
 position = Vector2(902, 920)
-channel = Array[int]([1, 0])
+channel = 1
 
 [node name="Button1" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
 position = Vector2(538, 920)
+channel = 0
 
 [node name="Door3" parent="Interactables" unique_id=1166924423 instance=ExtResource("5_37o0v")]
-position = Vector2(1378, 800)
-channel = 2
+position = Vector2(1392, 800)
+channel = Array[int]([2])
 
 [node name="Door2" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
 position = Vector2(987, 800)
-channel = 1
+channel = Array[int]([1])
 
 [node name="Door" parent="Interactables" unique_id=699766173 instance=ExtResource("5_37o0v")]
 position = Vector2(715, 800)
 gateType = 3
+channel = Array[int]([0, 1])
 
 [node name="Checkpoint" parent="." unique_id=1819830404 instance=ExtResource("6_cd7xb")]
 position = Vector2(138, 904)
@@ -427,12 +506,6 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntryDoor" unique_id=1791503013]
 shape = SubResource("RectangleShape2D_kx36b")
-
-[node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
-script = ExtResource("10_iy3k3")
-death_label = NodePath("../UIManager/Death/Count")
-game_over_screen = NodePath("../UIManager/GameOver")
-restart_button = NodePath("../UIManager/GameOver/RestartButton")
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1501658629]
 

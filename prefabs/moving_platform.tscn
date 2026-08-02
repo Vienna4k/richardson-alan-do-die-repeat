@@ -10,6 +10,7 @@ size = Vector2(97, 32)
 
 [node name="MovingPlatform" type="AnimatableBody2D" unique_id=5983034]
 script = ExtResource("1_mn0pp")
+channel = Array[int]([0])
 
 [node name="MovingPlatform" type="Sprite2D" parent="." unique_id=989271470]
 texture = ExtResource("1_ah4pd")

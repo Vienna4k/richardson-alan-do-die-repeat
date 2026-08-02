@@ -218,7 +218,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.position.x = 0.0
 			
 			if carried_corpse:
-				carried_corpse.global_position = global_position + Vector2(20 * facing_direction, 0)
+				carried_corpse.global_position = global_position + Vector2(27 * facing_direction, 0)
 				
 				left_arm.freeze = true
 				right_arm.freeze = true

@@ -3,7 +3,7 @@ extends StaticBody2D
 enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 @export var gateType : GateType
 
-@export var channel : int = 0
+@export var channel: Array[int] = []
 @onready var door_sound_open : AudioStreamPlayer = $"DoorOpen"
 @onready var door_sound_close : AudioStreamPlayer = $"DoorClose"
 @onready var door_anim : AnimationPlayer = $AnimationPlayer
@@ -15,7 +15,7 @@ func _ready() -> void:
 	var buttons: Array[Node] = get_tree().get_nodes_in_group("buttons")
 	for node in buttons:
 		var my_button: GameButton = node as GameButton
-		if channel in my_button.channel:
+		if my_button.channel in channel:
 			connected_buttons.append(my_button)
 			var pressed_sig: Signal = my_button.button_pressed
 			var released_sig: Signal = my_button.button_released
