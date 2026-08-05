@@ -421,15 +421,15 @@ texture = ExtResource("1_iivtx")
 [node name="Wiring" type="Node2D" parent="." unique_id=645224535]
 
 [node name="WiringChannel0" type="TileMapLayer" parent="Wiring" unique_id=834544397]
-tile_map_data = PackedByteArray("AAAQABwAAAACAAIAAAAQABsAAAACAAIAAAAQABoAAAACAAIAAAAQABkAAAAQAAIAAAARABkAAAAAAAIAAAASABkAAAAAAAIAAAATABkAAAAAAAIAAAAUABkAAAAAAAIAAAAVABkAAAASAAIAAAA=")
+tile_map_data = PackedByteArray("AAAQABwAAAACAAIAAAAQABsAAAACAAIAAAAQABoAAAACAAIAAAAQABkAAAAQAAIAAAARABkAAAAAAAIAAAASABkAAAAAAAIAAAATABkAAAAAAAIAAAAUABkAAAAAAAIAAAAVABkAAAAAAAIAAAAWABkAAAASAAIAAAA=")
 tile_set = SubResource("TileSet_yrape")
 
 [node name="WiringChannel1" type="TileMapLayer" parent="Wiring" unique_id=1731961944]
-tile_map_data = PackedByteArray("AAAcABwAAAACAAIAAAAcABsAAAACAAIAAAAcABoAAAACAAIAAAAcABkAAAAGAAIAAAAdABkAAAASAAIAAAAbABkAAAAAAAIAAAAaABkAAAAAAAIAAAAZABkAAAAAAAIAAAAYABkAAAAAAAIAAAAXABkAAAATAAMAAAA=")
+tile_map_data = PackedByteArray("AAAgABkAAAAGAAIAAAAhABkAAAAAAAIAAAAiABkAAAASAAIAAAAdABkAAAAAAAIAAAAeABkAAAAAAAIAAAAfABkAAAAAAAIAAAAYABkAAAATAAMAAAAZABkAAAAAAAIAAAAaABkAAAAAAAIAAAAbABkAAAAAAAIAAAAcABkAAAAAAAIAAAAgABoAAAACAAIAAAAgABsAAAACAAIAAAAgABwAAAACAAIAAAA=")
 tile_set = SubResource("TileSet_yrape")
 
 [node name="WiringChannel2" type="TileMapLayer" parent="Wiring" unique_id=2072383169]
-tile_map_data = PackedByteArray("AAAnABwAAAACAAIAAAAnABsAAAACAAIAAAAnABoAAAACAAIAAAAnABkAAAAQAAIAAAAoABkAAAAAAAIAAAApABkAAAAAAAIAAAAqABkAAAASAAIAAAA=")
+tile_map_data = PackedByteArray("AAAyABkAAAAQAAIAAAAyABoAAAACAAIAAAAyABsAAAACAAIAAAAyABwAAAACAAIAAAAzABkAAAAAAAIAAAA0ABkAAAAAAAIAAAA1ABkAAAASAAIAAAA=")
 tile_set = SubResource("TileSet_yrape")
 
 [node name="Tilesets" type="Node2D" parent="." unique_id=2053834606]
@@ -448,14 +448,42 @@ Chamber
 01"
 label_settings = SubResource("LabelSettings_3fy12")
 
+[node name="Label2" type="Label" parent="." unique_id=334183133]
+offset_left = 549.0
+offset_top = 849.0
+offset_right = 663.0
+offset_bottom = 903.0
+text = "Hold \"R\"
+ to die"
+label_settings = SubResource("LabelSettings_3fy12")
+
+[node name="Label4" type="Label" parent="." unique_id=1040256633]
+offset_left = 1402.0
+offset_top = 830.0
+offset_right = 1610.0
+offset_bottom = 884.0
+text = "Press \"F\" to 
+drop your body"
+label_settings = SubResource("LabelSettings_3fy12")
+
+[node name="Label3" type="Label" parent="." unique_id=894686772]
+offset_left = 866.0
+offset_top = 830.0
+offset_right = 1088.0
+offset_bottom = 903.0
+text = "Buttons can 
+affect multiple 
+objects"
+label_settings = SubResource("LabelSettings_3fy12")
+
 [node name="Interactables" type="Node2D" parent="." unique_id=1445266196]
 
 [node name="Button3" parent="Interactables" unique_id=251122345 instance=ExtResource("4_iivtx")]
-position = Vector2(1267, 920)
+position = Vector2(1632, 920)
 channel = 2
 
 [node name="Button2" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
-position = Vector2(902, 920)
+position = Vector2(1048, 920)
 channel = 1
 
 [node name="Button1" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
@@ -463,15 +491,15 @@ position = Vector2(538, 920)
 channel = 0
 
 [node name="Door3" parent="Interactables" unique_id=1166924423 instance=ExtResource("5_37o0v")]
-position = Vector2(1392, 800)
+position = Vector2(1757, 800)
 channel = Array[int]([2])
 
 [node name="Door2" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
-position = Vector2(987, 800)
+position = Vector2(1133, 800)
 channel = Array[int]([1])
 
 [node name="Door" parent="Interactables" unique_id=699766173 instance=ExtResource("5_37o0v")]
-position = Vector2(715, 800)
+position = Vector2(755, 800)
 gateType = 3
 channel = Array[int]([0, 1])
 
