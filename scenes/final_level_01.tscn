@@ -424,28 +424,39 @@ Chamber
 label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Label2" type="Label" parent="." unique_id=334183133]
-offset_left = 549.0
-offset_top = 849.0
-offset_right = 663.0
-offset_bottom = 903.0
+offset_left = 409.0
+offset_top = 832.0
+offset_right = 523.0
+offset_bottom = 886.0
 text = "Hold \"R\"
  to die"
 label_settings = SubResource("LabelSettings_3fy12")
 
+[node name="Label5" type="Label" parent="." unique_id=327091130]
+offset_left = 570.0
+offset_top = 836.0
+offset_right = 734.0
+offset_bottom = 909.0
+text = "Press \"F\"
+near bodies
+to pick 
+them up"
+label_settings = SubResource("LabelSettings_3fy12")
+
 [node name="Label4" type="Label" parent="." unique_id=1040256633]
-offset_left = 1402.0
-offset_top = 830.0
-offset_right = 1610.0
-offset_bottom = 884.0
-text = "Press \"F\" to 
-drop your body"
+offset_left = 1152.0
+offset_top = 840.0
+offset_right = 1376.0
+offset_bottom = 894.0
+text = "Press \"F\" again 
+to drop bodies"
 label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Label3" type="Label" parent="." unique_id=894686772]
-offset_left = 866.0
-offset_top = 830.0
-offset_right = 1088.0
-offset_bottom = 903.0
+offset_left = 821.0
+offset_top = 821.0
+offset_right = 1043.0
+offset_bottom = 894.0
 text = "Buttons can 
 affect multiple 
 objects"
@@ -454,7 +465,7 @@ label_settings = SubResource("LabelSettings_3fy12")
 [node name="Interactables" type="Node2D" parent="." unique_id=1445266196]
 
 [node name="Button3" parent="Interactables" unique_id=251122345 instance=ExtResource("4_iivtx")]
-position = Vector2(1632, 920)
+position = Vector2(1267, 920)
 channel = 2
 
 [node name="Button2" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
@@ -466,7 +477,7 @@ position = Vector2(538, 920)
 channel = 0
 
 [node name="Door3" parent="Interactables" unique_id=1166924423 instance=ExtResource("5_37o0v")]
-position = Vector2(1757, 800)
+position = Vector2(1392, 800)
 channel = Array[int]([2])
 
 [node name="Door2" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
