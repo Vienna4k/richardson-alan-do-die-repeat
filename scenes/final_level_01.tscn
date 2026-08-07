@@ -400,11 +400,11 @@ tile_map_data = PackedByteArray("AAAQABwAAAACAAIAAAAQABsAAAACAAIAAAAQABoAAAACAAI
 tile_set = SubResource("TileSet_yrape")
 
 [node name="WiringChannel1" type="TileMapLayer" parent="Wiring" unique_id=1731961944]
-tile_map_data = PackedByteArray("AAAgABkAAAAGAAIAAAAhABkAAAAAAAIAAAAiABkAAAASAAIAAAAdABkAAAAAAAIAAAAeABkAAAAAAAIAAAAfABkAAAAAAAIAAAAYABkAAAATAAMAAAAZABkAAAAAAAIAAAAaABkAAAAAAAIAAAAbABkAAAAAAAIAAAAcABkAAAAAAAIAAAAgABoAAAACAAIAAAAgABsAAAACAAIAAAAgABwAAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAAhABkAAAASAAIAAAAdABkAAAAAAAIAAAAeABkAAAAAAAIAAAAfABkAAAAGAAIAAAAYABkAAAATAAMAAAAZABkAAAAAAAIAAAAaABkAAAAAAAIAAAAbABkAAAAAAAIAAAAcABkAAAAAAAIAAAAfABoAAAACAAIAAAAfABsAAAACAAIAAAAfABwAAAACAAIAAAAgABkAAAAAAAIAAAA=")
 tile_set = SubResource("TileSet_yrape")
 
 [node name="WiringChannel2" type="TileMapLayer" parent="Wiring" unique_id=2072383169]
-tile_map_data = PackedByteArray("AAAyABkAAAAQAAIAAAAyABoAAAACAAIAAAAyABsAAAACAAIAAAAyABwAAAACAAIAAAAzABkAAAAAAAIAAAA0ABkAAAAAAAIAAAA1ABkAAAASAAIAAAA=")
+tile_map_data = PackedByteArray("AAAnABwAAAAQAAIAAAAoABwAAAAAAAIAAAApABwAAAAAAAIAAAAqABwAAAAMAAIAAAAqABsAAAACAAIAAAAqABoAAAACAAIAAAAqABkAAAAVAAMAAAA=")
 tile_set = SubResource("TileSet_yrape")
 
 [node name="Tilesets" type="Node2D" parent="." unique_id=2053834606]
@@ -444,19 +444,19 @@ them up"
 label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Label4" type="Label" parent="." unique_id=1040256633]
-offset_left = 1152.0
-offset_top = 840.0
-offset_right = 1376.0
-offset_bottom = 894.0
+offset_left = 1125.0
+offset_top = 836.0
+offset_right = 1349.0
+offset_bottom = 890.0
 text = "Press \"F\" again 
 to drop bodies"
 label_settings = SubResource("LabelSettings_3fy12")
 
 [node name="Label3" type="Label" parent="." unique_id=894686772]
-offset_left = 821.0
-offset_top = 821.0
-offset_right = 1043.0
-offset_bottom = 894.0
+offset_left = 786.0
+offset_top = 826.0
+offset_right = 1008.0
+offset_bottom = 899.0
 text = "Buttons can 
 affect multiple 
 objects"
@@ -469,7 +469,7 @@ position = Vector2(1267, 920)
 channel = 2
 
 [node name="Button2" parent="Interactables" unique_id=916747425 instance=ExtResource("4_iivtx")]
-position = Vector2(1048, 920)
+position = Vector2(1004, 920)
 channel = 1
 
 [node name="Button1" parent="Interactables" unique_id=964161315 instance=ExtResource("4_iivtx")]
@@ -481,7 +481,7 @@ position = Vector2(1392, 800)
 channel = Array[int]([2])
 
 [node name="Door2" parent="Interactables" unique_id=1223700433 instance=ExtResource("5_37o0v")]
-position = Vector2(1133, 800)
+position = Vector2(1100, 800)
 channel = Array[int]([1])
 
 [node name="Door" parent="Interactables" unique_id=699766173 instance=ExtResource("5_37o0v")]

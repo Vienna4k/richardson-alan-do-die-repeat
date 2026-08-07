@@ -1,16 +1,16 @@
-extends Node
+extends SubViewport
 
 ## Zoom level for the full map view — tune until the whole level fits.
 @export var fullmap_zoom: Vector2 = Vector2(0.16, 0.16)
 
-@onready var minimap_camera: Camera2D = $SubViewport/MinimapCamera
+@onready var minimap_camera: Camera2D = $MinimapCamera
 
 var _map_overlay: Control = null
 var _is_open := false
 var _level_center := Vector2.ZERO
 
 func _ready() -> void:
-	($SubViewport as SubViewport).world_2d = get_viewport().world_2d
+	self.world_2d = self.world_2d
 	call_deferred("_find_nodes")
 
 func _find_nodes() -> void:

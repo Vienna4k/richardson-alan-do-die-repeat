@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="12_0wyaj"]
 [ext_resource type="PackedScene" uid="uid://cn4c5fm1kxdok" path="res://prefabs/spikes.tscn" id="12_nt35m"]
 [ext_resource type="PackedScene" uid="uid://ciw8cemuy37yv" path="res://prefabs/door.tscn" id="13_1vgci"]
+[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scenes/map.gd" id="13_067qv"]
 [ext_resource type="PackedScene" uid="uid://bai3jss17kx81" path="res://prefabs/spikes_small.tscn" id="14_0w3wa"]
-[ext_resource type="Script" uid="uid://d3fthvhiuxebx" path="res://scenes/mini_map.gd" id="15_067qv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33qst"]
 texture = ExtResource("4_4iic2")
@@ -793,9 +793,6 @@ font_size = 60
 font = ExtResource("3_0w3wa")
 font_size = 120
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_067qv"]
-viewport_path = NodePath("MiniMap/SubViewport")
-
 [node name="Final-Level01" type="Node2D" unique_id=402310896]
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
@@ -998,13 +995,14 @@ shape = SubResource("RectangleShape2D_u563m")
 [node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("9_nxacq")]
 position = Vector2(-425, 893)
 
-[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
+[node name="PlayerCam" type="Camera2D" parent="F-Player" unique_id=1177109819 node_paths=PackedStringArray("mapCam")]
 zoom = Vector2(4, 4)
 limit_left = -352
 limit_top = -911
 limit_right = 1408
 limit_bottom = 1067
-position_smoothing_enabled = true
+script = ExtResource("13_067qv")
+mapCam = NodePath("../../MapCam")
 
 [node name="Hazards" type="Node2D" parent="." unique_id=909817986]
 
@@ -1116,32 +1114,6 @@ rotation = -1.5707964
 position = Vector2(-19, -384)
 rotation = 1.5707964
 
-[node name="MiniMap" type="SubViewportContainer" parent="." unique_id=1568817468]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3104.0
-offset_top = 240.0
-offset_right = 3616.0
-offset_bottom = 752.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("15_067qv")
-
-[node name="SubViewport" type="SubViewport" parent="MiniMap" unique_id=1440309376]
-handle_input_locally = false
-size = Vector2i(320, 320)
-render_target_update_mode = 4
-
-[node name="MinimapCamera" type="Camera2D" parent="MiniMap/SubViewport" unique_id=321443790]
-zoom = Vector2(0.25, 0.25)
-limit_left = -352
-limit_top = -911
-limit_right = 1408
-limit_bottom = 1067
-
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1501658629]
 
 [node name="Death" type="TextureRect" parent="UIManager" unique_id=1066339235]
@@ -1209,35 +1181,9 @@ theme_override_fonts/font = ExtResource("3_0w3wa")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
 
-[node name="MapOverlay" type="Control" parent="UIManager" unique_id=113407962]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="UIManager/MapOverlay" unique_id=2061222669]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.62352943)
-
-[node name="Full Map" type="TextureRect" parent="UIManager/MapOverlay" unique_id=2044578332]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -683.0
-offset_top = -398.0
-offset_right = 683.0
-offset_bottom = 398.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_067qv")
+[node name="MapCam" type="Camera2D" parent="." unique_id=1198316289]
+zoom = Vector2(0.7, 0.7)
+limit_left = -352
+limit_top = -911
+limit_right = 1408
+limit_bottom = 1067
