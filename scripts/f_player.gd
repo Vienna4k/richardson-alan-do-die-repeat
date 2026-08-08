@@ -165,6 +165,8 @@ func die() -> void:
 		
 		new_player.ready.connect(func() -> void:
 			camera.reset_smoothing()
+			if not camera.get("is_map_open"):
+				camera.make_current()
 		)
 			
 	get_parent().call_deferred("add_child", new_player)

@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="12_0wyaj"]
 [ext_resource type="PackedScene" uid="uid://cn4c5fm1kxdok" path="res://prefabs/spikes.tscn" id="12_nt35m"]
 [ext_resource type="PackedScene" uid="uid://ciw8cemuy37yv" path="res://prefabs/door.tscn" id="13_1vgci"]
-[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scenes/map.gd" id="13_067qv"]
+[ext_resource type="Script" path="res://scenes/map.gd" id="13_067qv"]
 [ext_resource type="PackedScene" uid="uid://bai3jss17kx81" path="res://prefabs/spikes_small.tscn" id="14_0w3wa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33qst"]
@@ -1114,6 +1114,13 @@ rotation = -1.5707964
 position = Vector2(-19, -384)
 rotation = 1.5707964
 
+[node name="MapCam" type="Camera2D" parent="." unique_id=1198316289]
+zoom = Vector2(0.5, 0.5)
+limit_left = -352
+limit_top = -911
+limit_right = 1408
+limit_bottom = 1067
+
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1501658629]
 
 [node name="Death" type="TextureRect" parent="UIManager" unique_id=1066339235]
@@ -1180,10 +1187,3 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_0w3wa")
 theme_override_font_sizes/font_size = 100
 text = "Restart"
-
-[node name="MapCam" type="Camera2D" parent="." unique_id=1198316289]
-zoom = Vector2(0.7, 0.7)
-limit_left = -352
-limit_top = -911
-limit_right = 1408
-limit_bottom = 1067

@@ -368,7 +368,7 @@ font_size = 60
 font = ExtResource("9_ghvsb")
 font_size = 120
 
-[node name="Final-Level01" type="Node2D" unique_id=402310896]
+[node name="Final-Level02" type="Node2D" unique_id=402310896]
 
 [node name="GameManager" type="Node" parent="." unique_id=38481773 node_paths=PackedStringArray("death_label", "game_over_screen", "restart_button") groups=["game_manager"]]
 script = ExtResource("10_iy3k3")
