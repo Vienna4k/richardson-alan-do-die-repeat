@@ -36,18 +36,35 @@ func _process(_delta: float) -> void:
 		toggle_wiring_mode()
 
 func _input(event: InputEvent) -> void:
-	if not is_map_open or not _is_zoomed: return
+	if not is_map_open: return
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
+		if _is_zoomed and mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
 			_zoom_to_overview()
+			return
+		if mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed:
+			var world_pos := _mouse_to_world()
+			for za in _zoom_areas:
+				if not is_instance_valid(za): continue
+				var rect := _get_za_rect(za)
+				if rect.has_point(world_pos):
+					_zoom_to_area(rect)
+					get_viewport().set_input_as_handled()
+					return
+	elif event is InputEventMouseMotion:
+		var world_pos := _mouse_to_world()
+		for za in _zoom_areas:
+			if not is_instance_valid(za): continue
+			var hovered := _get_za_rect(za).has_point(world_pos)
+			if za._hovered != hovered:
+				za._hovered = hovered
+				za.queue_redraw()
 
 func toggle_map_view() -> void:
 	is_map_open = !is_map_open
 	if is_map_open:
 		mapCam.make_current()
 		_collect_zoom_areas()
-		_set_zoom_areas_pickable(true)
 	else:
 		if is_wiring_mode:
 			is_wiring_mode = false
@@ -57,7 +74,10 @@ func toggle_map_view() -> void:
 				mapCam.zoom = _initial_map_zoom
 				mapCam.position = _initial_map_position
 			_is_zoomed = false
-		_set_zoom_areas_pickable(false)
+		for za in _zoom_areas:
+			if is_instance_valid(za) and za._hovered:
+				za._hovered = false
+				za.queue_redraw()
 		make_current()
 
 func toggle_wiring_mode() -> void:
@@ -93,16 +113,19 @@ func _collect_zoom_areas() -> void:
 	_zoom_areas.clear()
 	for node in get_tree().get_nodes_in_group("zoom_areas"):
 		var za := node as ZoomArea
-		if za and not za.area_clicked.is_connected(_on_area_clicked):
-			za.area_clicked.connect(_on_area_clicked)
+		if za:
 			_zoom_areas.append(za)
 
-func _set_zoom_areas_pickable(enabled: bool) -> void:
-	for za in _zoom_areas:
-		if is_instance_valid(za):
-			za.input_pickable = enabled
+func _mouse_to_world() -> Vector2:
+	return get_viewport().get_canvas_transform().affine_inverse() * get_viewport().get_mouse_position()
 
-func _on_area_clicked(rect: Rect2) -> void:
+func _get_za_rect(za: ZoomArea) -> Rect2:
+	var cs := za.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if not cs or not cs.shape is RectangleShape2D: return Rect2()
+	var size := (cs.shape as RectangleShape2D).size
+	return Rect2(za.to_global(cs.position) - size / 2.0, size)
+
+func _zoom_to_area(rect: Rect2) -> void:
 	if not mapCam: return
 	var vp_size := get_viewport().get_visible_rect().size
 	var zoom_scale: float = min(vp_size.x / rect.size.x, vp_size.y / rect.size.y) * 0.85
