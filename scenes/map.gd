@@ -32,8 +32,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggleMap"):
 		toggle_map_view()
-	if is_map_open and Input.is_action_just_pressed("toggleWiring"):
-		toggle_wiring_mode()
+	#if is_map_open and Input.is_action_just_pressed("toggleWiring"):
+		#toggle_wiring_mode()
 
 func _input(event: InputEvent) -> void:
 	if not is_map_open: return
@@ -65,6 +65,7 @@ func toggle_map_view() -> void:
 	if is_map_open:
 		mapCam.make_current()
 		_collect_zoom_areas()
+		toggle_wiring_mode()
 	else:
 		if is_wiring_mode:
 			is_wiring_mode = false
@@ -99,6 +100,9 @@ func _apply_wiring_modulates(active: bool) -> void:
 					mat.set_shader_parameter("fill_color", CHANNEL_COLORS[idx % CHANNEL_COLORS.size()])
 					(child as TileMapLayer).material = mat
 					idx += 1
+				
+				var nodeChild : Node2D = child
+				nodeChild.z_index = 2
 	else:
 		if bg: bg.modulate = Color.WHITE
 		if tilesets: tilesets.modulate = Color.WHITE
@@ -108,6 +112,10 @@ func _apply_wiring_modulates(active: bool) -> void:
 			for child in wiring.get_children():
 				if child is TileMapLayer:
 					(child as TileMapLayer).material = null
+				
+				var nodeChild : Node2D = child
+				nodeChild.z_index = 0
+				
 
 func _collect_zoom_areas() -> void:
 	_zoom_areas.clear()

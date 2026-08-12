@@ -733,36 +733,43 @@ restart_button = NodePath("../UIManager/GameOver/RestartButton")
 [node name="BG" type="Node2D" parent="." unique_id=1301598992]
 
 [node name="Back" type="Sprite2D" parent="BG" unique_id=2079340299]
+z_index = -1
 position = Vector2(320, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back2" type="Sprite2D" parent="BG" unique_id=1299282851]
+z_index = -1
 position = Vector2(960, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back3" type="Sprite2D" parent="BG" unique_id=1010458230]
+z_index = -1
 position = Vector2(1600, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back4" type="Sprite2D" parent="BG" unique_id=1643933897]
+z_index = -1
 position = Vector2(2240, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back5" type="Sprite2D" parent="BG" unique_id=1004503573]
+z_index = -1
 position = Vector2(2880, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back6" type="Sprite2D" parent="BG" unique_id=1900573818]
+z_index = -1
 position = Vector2(3520, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
 
 [node name="Back7" type="Sprite2D" parent="BG" unique_id=2110198018]
+z_index = -1
 position = Vector2(4160, 840)
 scale = Vector2(2, 2)
 texture = ExtResource("1_cq2ho")
@@ -975,9 +982,9 @@ limit_top = 388
 limit_right = 4514
 limit_bottom = 1417
 
-[node name="Area2D" type="Area2D" parent="." unique_id=440427605]
+[node name="Area" type="Area2D" parent="." unique_id=440427605]
 position = Vector2(2787, 821)
 script = ExtResource("16_et36h")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=553888479]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=553888479]
 shape = SubResource("RectangleShape2D_oelc2")

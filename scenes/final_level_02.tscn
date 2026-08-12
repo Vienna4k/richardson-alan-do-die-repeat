@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bkeir5hkm0ua7" path="res://scenes/final_level_03.tscn" id="8_30new"]
 [ext_resource type="PackedScene" uid="uid://ceo6t6428dmfs" path="res://prefabs/checkpoint.tscn" id="10_f1rc4"]
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="10_qw24l"]
+[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scenes/map.gd" id="11_dua56"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="11_f1rc4"]
 [ext_resource type="Texture2D" uid="uid://di8yxfurcat4p" path="res://assets/2D Resources/tilesets/Wiring.png" id="13_7gu5v"]
 
@@ -715,6 +716,7 @@ limit_top = 475
 limit_right = 2175
 limit_bottom = 1235
 position_smoothing_enabled = true
+script = ExtResource("11_dua56")
 
 [node name="ExitArea" parent="." unique_id=163354526 instance=ExtResource("7_7gu5v")]
 position = Vector2(1951, 874)
