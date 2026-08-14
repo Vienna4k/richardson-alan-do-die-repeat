@@ -19,6 +19,8 @@ func _ready() -> void:
 	update_ui()
 	if restart_button:
 		restart_button.pressed.connect(_on_restart_pressed)
+	
+	RenderingServer.set_default_clear_color(Color("000000"))
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):

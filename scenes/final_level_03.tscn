@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://6lom62ex17me" path="res://assets/2D Resources/fonts/PixelOperator8-Bold.ttf" id="6_px8o5"]
 [ext_resource type="PackedScene" uid="uid://cn4c5fm1kxdok" path="res://prefabs/spikes.tscn" id="7_4ajvf"]
 [ext_resource type="PackedScene" uid="uid://dmpdjq1hngkxc" path="res://prefabs/exit_area.tscn" id="7_acgkv"]
-[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scenes/map.gd" id="8_acgkv"]
+[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scripts/map.gd" id="8_acgkv"]
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="8_cq2ho"]
 [ext_resource type="PackedScene" uid="uid://8hhakrdc47dc" path="res://scenes/final_level_04.tscn" id="9_isqls"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="9_kmwpk"]

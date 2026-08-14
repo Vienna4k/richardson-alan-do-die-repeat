@@ -1,10 +1,12 @@
 extends Camera2D
+class_name Map
 
 @export var mapCam: Camera2D
 @export var bg: Node2D
 @export var tilesets: Node2D
 @export var wiring: Node2D
 @export var interactables: Node2D
+@export var hider : Node2D
 
 const CHANNEL_COLORS: Array[Color] = [
 	Color(0.2, 0.6, 1.0),   # blue
@@ -88,7 +90,7 @@ func toggle_wiring_mode() -> void:
 func _apply_wiring_modulates(active: bool) -> void:
 	if active:
 		if bg: bg.modulate = Color(0.15, 0.15, 0.15)
-		if tilesets: tilesets.modulate = Color(0.04, 0.04, 0.04)
+		if tilesets: tilesets.modulate = Color(0.7, 0.7, 0.7)
 		if interactables: interactables.modulate = Color.WHITE
 		if wiring:
 			wiring.modulate = Color.WHITE
@@ -103,6 +105,8 @@ func _apply_wiring_modulates(active: bool) -> void:
 				
 				var nodeChild : Node2D = child
 				nodeChild.z_index = 2
+		if hider != null: hider.visible = true
+
 	else:
 		if bg: bg.modulate = Color.WHITE
 		if tilesets: tilesets.modulate = Color.WHITE
@@ -115,7 +119,9 @@ func _apply_wiring_modulates(active: bool) -> void:
 				
 				var nodeChild : Node2D = child
 				nodeChild.z_index = 0
-				
+		
+		
+		if hider != null: hider.visible = false
 
 func _collect_zoom_areas() -> void:
 	_zoom_areas.clear()

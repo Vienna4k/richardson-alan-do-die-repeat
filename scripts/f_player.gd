@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name FPlayer
 
+
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer = $AudioStreamPlayer
 
@@ -63,7 +65,7 @@ func _ready() -> void:
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	_start_blink_timer()
 	
-	# ==== NEW: Save the initial offset of the raycasts ====
+	# ==== Save the initial offset of the raycasts ====
 	left_ray_base_x = left_ray.position.x
 	right_ray_base_x = right_ray.position.x
 	left_ray_target_base_x = left_ray.target_position.x
@@ -266,9 +268,18 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 
-	move_and_slide()
-	_handle_procedural_legs()
-	was_on_floor = is_on_floor()
+	var _map : Map = $Camera2D
+
+	if _map.is_map_open:
+		return
+	else:
+		move_and_slide()
+		_handle_procedural_legs()
+		was_on_floor = is_on_floor()
+
+	#move_and_slide()
+	#_handle_procedural_legs()
+	#was_on_floor = is_on_floor()
 
 func _flip_player(new_dir: int) -> void:
 	facing_direction = new_dir

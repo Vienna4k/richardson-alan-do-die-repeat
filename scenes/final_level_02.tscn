@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bkeir5hkm0ua7" path="res://scenes/final_level_03.tscn" id="8_30new"]
 [ext_resource type="PackedScene" uid="uid://ceo6t6428dmfs" path="res://prefabs/checkpoint.tscn" id="10_f1rc4"]
 [ext_resource type="Script" uid="uid://cfqm1xe4xb1wp" path="res://scripts/game_manager.gd" id="10_qw24l"]
-[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scenes/map.gd" id="11_dua56"]
+[ext_resource type="Script" uid="uid://57x0y2qxaif" path="res://scripts/map.gd" id="11_dua56"]
 [ext_resource type="Texture2D" uid="uid://dpeoqulwjbaid" path="res://assets/2D Resources/characters/DeadFace.png" id="11_f1rc4"]
 [ext_resource type="Texture2D" uid="uid://di8yxfurcat4p" path="res://assets/2D Resources/tilesets/Wiring.png" id="13_7gu5v"]
 
@@ -709,7 +709,7 @@ position = Vector2(116, 904)
 [node name="F-Player" parent="." unique_id=357200392 instance=ExtResource("4_ucrpd")]
 position = Vector2(-94, 899)
 
-[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819]
+[node name="Camera2D" type="Camera2D" parent="F-Player" unique_id=1177109819 node_paths=PackedStringArray("mapCam", "bg", "tilesets", "wiring", "interactables")]
 zoom = Vector2(3.5, 3.5)
 limit_left = 0
 limit_top = 475
@@ -717,6 +717,11 @@ limit_right = 2175
 limit_bottom = 1235
 position_smoothing_enabled = true
 script = ExtResource("11_dua56")
+mapCam = NodePath("../../MapCam")
+bg = NodePath("../../BG")
+tilesets = NodePath("../../Tilesets")
+wiring = NodePath("../../Wiring")
+interactables = NodePath("../../Interactables")
 
 [node name="ExitArea" parent="." unique_id=163354526 instance=ExtResource("7_7gu5v")]
 position = Vector2(1951, 874)
@@ -725,6 +730,12 @@ next_scene = ExtResource("8_30new")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1497759195]
 position = Vector2(160, 648)
 shape = SubResource("RectangleShape2D_u563m")
+
+[node name="MapCam" type="Camera2D" parent="." unique_id=457945220]
+limit_left = -29
+limit_top = 279
+limit_right = 2193
+limit_bottom = 1234
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1745408658]
 
