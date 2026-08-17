@@ -143,14 +143,14 @@ func _zoom_to_area(rect: Rect2) -> void:
 	if not mapCam: return
 	var vp_size := get_viewport().get_visible_rect().size
 	var zoom_scale: float = min(vp_size.x / rect.size.x, vp_size.y / rect.size.y) * 0.85
-	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(mapCam, "zoom", Vector2.ONE * zoom_scale, 0.35)
-	tween.parallel().tween_property(mapCam, "position", rect.get_center(), 0.35)
+	mapCam.zoom = Vector2.ONE * zoom_scale
+	mapCam.position = rect.get_center()
+	mapCam.reset_physics_interpolation()
 	_is_zoomed = true
 
 func _zoom_to_overview() -> void:
 	if not mapCam: return
-	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(mapCam, "zoom", _initial_map_zoom, 0.35)
-	tween.parallel().tween_property(mapCam, "position", _initial_map_position, 0.35)
+	mapCam.zoom = _initial_map_zoom
+	mapCam.position = _initial_map_position
+	mapCam.reset_physics_interpolation()
 	_is_zoomed = false

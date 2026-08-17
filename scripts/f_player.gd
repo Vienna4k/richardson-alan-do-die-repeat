@@ -191,6 +191,15 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
+	var _map: Map = $Camera2D as Map
+	if _map.is_map_open:
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+		move_and_slide()
+		was_on_floor = is_on_floor()
+		return
+
 	if Input.is_action_pressed("kill"):
 		death_charge += delta
 		var shake_intensity: float = (death_charge / DEATH_CHARGE_MAX) * 5.0
@@ -242,7 +251,7 @@ func _physics_process(delta: float) -> void:
 					right_arm.freeze = false
 			else:
 				if Input.is_action_just_pressed("pickup"):
-					var closest := _get_closest_corpse(30.0)
+					var closest := _get_closest_corpse(35.0)
 					if closest:
 						carried_corpse = closest
 						carried_corpse.is_carried = true
@@ -268,18 +277,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 
-	var _map : Map = $Camera2D
-
-	if _map.is_map_open:
-		return
-	else:
-		move_and_slide()
-		_handle_procedural_legs()
-		was_on_floor = is_on_floor()
-
-	#move_and_slide()
-	#_handle_procedural_legs()
-	#was_on_floor = is_on_floor()
+	move_and_slide()
+	_handle_procedural_legs()
+	was_on_floor = is_on_floor()
 
 func _flip_player(new_dir: int) -> void:
 	facing_direction = new_dir

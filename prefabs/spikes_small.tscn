@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bai3jss17kx81"]
 
-[ext_resource type="Script" uid="uid://21bpisepj23m" path="res://scripts/spikes.gd" id="1_bjykv"]
-[ext_resource type="Texture2D" uid="uid://cxiboj2lgdfxs" path="res://assets/2D Resources/tilesets/Spikes.png" id="2_4r7lc"]
+[ext_resource type="Script" uid="uid://21bpisepj23m" path="res://scripts/spikes.gd" id="1_of1uu"]
+[ext_resource type="Texture2D" uid="uid://cxiboj2lgdfxs" path="res://assets/2D Resources/tilesets/Spikes.png" id="2_q2i5k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl3ny"]
 size = Vector2(62, 9)
 
 [node name="Spikes_Small" type="Area2D" unique_id=770914034]
-script = ExtResource("1_bjykv")
+script = ExtResource("1_of1uu")
 
 [node name="Spikes" type="Sprite2D" parent="." unique_id=116273503]
 scale = Vector2(1, 0.875)
-texture = ExtResource("2_4r7lc")
+texture = ExtResource("2_q2i5k")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
