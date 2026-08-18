@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
+enum GateType {None, Or, Nor, Xor, Xnor, And, Nand, Sequence}
 @export var gateType : GateType
 @export var isPingPlat : bool = false
 
@@ -12,6 +12,7 @@ enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 var isMoving : bool = false
 var hasActivated : bool = false
 var connected_buttons: Array[GameButton] = []
+var _press_sequence: Array[int] = []
 
 func _ready() -> void:
 	var buttons: Array[Node] = get_tree().get_nodes_in_group("buttons")
@@ -54,6 +55,8 @@ func evaluate_gate() -> void:
 			is_condition_met = total_buttons_pressed == total_buttons
 		GateType.Nand:
 			is_condition_met = total_buttons_pressed < total_buttons
+		GateType.Sequence:
+			is_condition_met = (_press_sequence == channel)
 
 	if !isPingPlat:
 		if is_condition_met && !isMoving:
@@ -78,8 +81,18 @@ func evaluate_gate() -> void:
 			move_anim.play_backwards("move")
 			powerDown.play()
 
-func _on_button_pressed(_button_channel: int) -> void:
+func _on_button_pressed(button_channel: int) -> void:
+	if gateType == GateType.Sequence:
+		var expected_index := _press_sequence.size()
+		if expected_index < channel.size() and button_channel == channel[expected_index]:
+			_press_sequence.append(button_channel)
+		else:
+			_press_sequence = []
+			for b in connected_buttons:
+				b.force_release()
 	evaluate_gate()
 
 func _on_button_released(_button_channel: int) -> void:
+	if gateType == GateType.Sequence:
+		_press_sequence = []
 	evaluate_gate()

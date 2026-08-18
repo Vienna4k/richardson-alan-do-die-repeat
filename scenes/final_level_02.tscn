@@ -562,6 +562,10 @@ sources/0 = SubResource("TileSetAtlasSource_kpcmt")
 [sub_resource type="LabelSettings" id="LabelSettings_30new"]
 font = ExtResource("7_kpcmt")
 
+[sub_resource type="LabelSettings" id="LabelSettings_j5v8a"]
+font = ExtResource("7_kpcmt")
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Animation" id="Animation_30new"]
 length = 0.001
 tracks/0/type = "value"
@@ -680,6 +684,16 @@ Chamber
 02"
 label_settings = SubResource("LabelSettings_30new")
 
+[node name="Label3" type="Label" parent="Tilesets" unique_id=1152288845]
+offset_left = 1386.0
+offset_top = 603.0
+offset_right = 1628.0
+offset_bottom = 657.0
+text = "My favorite song 
+is Vienna 
+(Remember that)"
+label_settings = SubResource("LabelSettings_j5v8a")
+
 [node name="Interactables" type="Node2D" parent="." unique_id=308023126]
 
 [node name="Button" parent="Interactables" unique_id=916747425 instance=ExtResource("5_53ot0")]
@@ -732,10 +746,11 @@ position = Vector2(160, 648)
 shape = SubResource("RectangleShape2D_u563m")
 
 [node name="MapCam" type="Camera2D" parent="." unique_id=457945220]
-limit_left = -29
+zoom = Vector2(0.9, 0.9)
+limit_left = -40
 limit_top = 279
 limit_right = 2193
-limit_bottom = 1234
+limit_bottom = 1106
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1745408658]
 

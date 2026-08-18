@@ -8,6 +8,8 @@ signal button_released(channel: int)
 @export var channel: int = 0
 ## Atlas offset from the "off" tile to its "on/glow" counterpart in the spritesheet.
 @export var glow_atlas_offset: Vector2i = Vector2i(0, -2)
+## When true, the button stays pressed after the player leaves; press again to release.
+@export var latch: bool = false
 
 @onready var button_anim: AnimationPlayer = $AnimationPlayer
 
@@ -43,6 +45,14 @@ func _set_wire_state(activate: bool) -> void:
 		var new_atlas: Vector2i = base + glow_atlas_offset if activate else base
 		_wiring_layer.set_cell(cell, _source_ids[cell], new_atlas, _alt_tiles[cell])
 
+func force_release() -> void:
+	if not is_pressed:
+		return
+	is_pressed = false
+	button_anim.play_backwards("press_down")
+	_set_wire_state(false)
+	button_released.emit(channel)
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		if not is_pressed:
@@ -50,9 +60,14 @@ func _on_body_entered(body: Node2D) -> void:
 			button_anim.play("press_down")
 			_set_wire_state(true)
 			button_pressed.emit(channel)
+		elif latch:
+			is_pressed = false
+			button_anim.play_backwards("press_down")
+			_set_wire_state(false)
+			button_released.emit(channel)
 
 func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group("players"):
+	if body.is_in_group("players") and not latch:
 		if get_overlapping_bodies().filter(func(b: Node2D) -> bool: return b.is_in_group("players") and b != body).is_empty():
 			is_pressed = false
 			button_anim.play_backwards("press_down")

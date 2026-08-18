@@ -16,6 +16,19 @@ const CHANNEL_COLORS: Array[Color] = [
 	Color(1.0, 0.9, 0.15),  # yellow
 	Color(0.9, 0.2, 0.2),   # red
 	Color(0.2, 0.9, 0.9),   # cyan
+	Color(1.0, 0.4, 0.7),   # pink
+	Color(0.5, 0.2, 1.0),   # violet
+	Color(0.15, 0.75, 0.55),# teal
+	Color(1.0, 0.75, 0.3),  # gold
+	Color(0.6, 0.9, 0.2),   # lime
+	Color(1.0, 0.3, 0.2),   # coral
+	Color(0.3, 0.5, 1.0),   # periwinkle
+	Color(0.8, 0.5, 0.2),   # brown
+	Color(0.9, 0.9, 0.9),   # white
+	Color(0.5, 0.85, 1.0),  # sky
+	Color(0.7, 0.2, 0.35),  # crimson
+	Color(0.4, 1.0, 0.8),   # mint
+	Color(1.0, 0.6, 0.9),   # rose
 ]
 
 var is_map_open: bool = false

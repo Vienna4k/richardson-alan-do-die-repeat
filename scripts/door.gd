@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
+enum GateType {None, Or, Nor, Xor, Xnor, And, Nand, Sequence}
 @export var gateType : GateType
 
 @export var channel: Array[int] = []
@@ -10,6 +10,7 @@ enum GateType {None, Or, Nor, Xor, Xnor, And, Nand}
 
 var isOpen : bool = false
 var connected_buttons: Array[GameButton] = []
+var _press_sequence: Array[int] = []
 
 func _ready() -> void:
 	var buttons: Array[Node] = get_tree().get_nodes_in_group("buttons")
@@ -52,6 +53,8 @@ func evaluate_gate() -> void:
 			is_condition_met = total_buttons_pressed == total_buttons
 		GateType.Nand:
 			is_condition_met = total_buttons_pressed < total_buttons
+		GateType.Sequence:
+			is_condition_met = (_press_sequence == channel)
 
 	if is_condition_met and not isOpen:
 		door_anim.play("open")
@@ -62,8 +65,18 @@ func evaluate_gate() -> void:
 		door_sound_close.play()
 		isOpen = false
 
-func _on_button_pressed(_button_channel: int) -> void:
+func _on_button_pressed(button_channel: int) -> void:
+	if gateType == GateType.Sequence:
+		var expected_index := _press_sequence.size()
+		if expected_index < channel.size() and button_channel == channel[expected_index]:
+			_press_sequence.append(button_channel)
+		else:
+			_press_sequence = []
+			for b in connected_buttons:
+				b.force_release()
 	evaluate_gate()
 
 func _on_button_released(_button_channel: int) -> void:
+	if gateType == GateType.Sequence:
+		_press_sequence = []
 	evaluate_gate()

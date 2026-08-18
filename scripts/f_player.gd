@@ -192,13 +192,15 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var _map: Map = $Camera2D as Map
-	if _map.is_map_open:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
-		move_and_slide()
-		was_on_floor = is_on_floor()
-		return
+	if _map != null:
+		if _map.is_map_open:
+			if not is_on_floor():
+				velocity += get_gravity() * delta
+				velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+				move_and_slide()
+				was_on_floor = is_on_floor()
+				return
+		
 
 	if Input.is_action_pressed("kill"):
 		death_charge += delta

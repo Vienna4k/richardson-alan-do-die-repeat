@@ -54,12 +54,6 @@ theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 100
 text = "Start"
 
-[node name="OptionsButton" type="Button" parent="MenuContainer" unique_id=1213592304]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8ln24")
-theme_override_font_sizes/font_size = 100
-text = "Options"
-
 [node name="QuitButton" type="Button" parent="MenuContainer" unique_id=577839883]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_8ln24")
@@ -67,5 +61,4 @@ theme_override_font_sizes/font_size = 100
 text = "Quit"
 
 [connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="MenuContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

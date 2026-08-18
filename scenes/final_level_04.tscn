@@ -783,6 +783,10 @@ _data = {
 &"move": SubResource("Animation_1vgci")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_m6f4e"]
+font = ExtResource("3_0w3wa")
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u563m"]
 size = Vector2(96, 64)
 
@@ -967,6 +971,17 @@ autoplay = &"move"
 
 [node name="Checkpoint2" parent="Interactables/Room 3 interactables" unique_id=850401390 instance=ExtResource("6_m6f4e")]
 position = Vector2(207, 328)
+
+[node name="Label3" type="Label" parent="Interactables/Room 3 interactables" unique_id=943233616]
+offset_left = -188.0
+offset_top = 199.0
+offset_right = 54.0
+offset_bottom = 253.0
+text = "My favorite 
+animal 
+is cats
+(Remember that)"
+label_settings = SubResource("LabelSettings_m6f4e")
 
 [node name="Room 4 interactables" type="Node2D" parent="Interactables" unique_id=2063146657]
 
