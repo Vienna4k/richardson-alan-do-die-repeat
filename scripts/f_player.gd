@@ -89,7 +89,7 @@ func _ready() -> void:
 		if node is Checkpoint:
 			spawn_points.append(node)
 	
-	currentCheckpoint = spawn_points[0]
+	setNewCheckpoint(spawn_points[0])
 
 func _start_blink_timer() -> void:
 	var wait_time: float = randf_range(5.0, 20.0)
@@ -176,8 +176,11 @@ func die() -> void:
 func setNewCheckpoint(node: Checkpoint) -> void:
 	for _checkpoint in spawn_points:
 		_checkpoint.isMostRecentCheckpoint = false
+		_checkpoint.onSprite.visible = false
+		
 	
 	node.isMostRecentCheckpoint = true
+	node.onSprite.visible = true
 
 func _physics_process(delta: float) -> void:
 	if is_dead:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhrk5au8k2ifv"
-path="res://.godot/imported/RespawnChamber.png-3d7f4db269f14ee7e85875ff13668e26.ctex"
+uid="uid://cllhkwel0c0s"
+path="res://.godot/imported/RespawnChamberOff.png-bf3fbe916dbcd8e2bb83c0119ecf8247.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D Resources/tilesets/RespawnChamber.png"
-dest_files=["res://.godot/imported/RespawnChamber.png-3d7f4db269f14ee7e85875ff13668e26.ctex"]
+source_file="res://assets/2D Resources/tilesets/RespawnChamberOff.png"
+dest_files=["res://.godot/imported/RespawnChamberOff.png-bf3fbe916dbcd8e2bb83c0119ecf8247.ctex"]
 
 [params]
 

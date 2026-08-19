@@ -1,18 +1,27 @@
 [gd_scene format=3 uid="uid://ceo6t6428dmfs"]
 
 [ext_resource type="Script" uid="uid://utkyscs6o42b" path="res://scripts/checkpoint.gd" id="1_jmy7n"]
-[ext_resource type="Texture2D" uid="uid://bhrk5au8k2ifv" path="res://assets/2D Resources/tilesets/RespawnChamber.png" id="1_xsm40"]
+[ext_resource type="Texture2D" uid="uid://cllhkwel0c0s" path="res://assets/2D Resources/tilesets/RespawnChamberOff.png" id="2_els25"]
+[ext_resource type="Texture2D" uid="uid://b86tq7qsoagcj" path="res://assets/2D Resources/tilesets/RespawnChamberOn.png" id="3_els25"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmy7n"]
 size = Vector2(34, 50)
 
-[node name="Checkpoint" type="Marker2D" unique_id=1819830404 groups=["spawnpoint"]]
+[node name="Checkpoint" type="Marker2D" unique_id=1819830404 node_paths=PackedStringArray("offSprite", "onSprite") groups=["spawnpoint"]]
 script = ExtResource("1_jmy7n")
+offSprite = NodePath("OffSprite")
+onSprite = NodePath("OnSprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483757360]
+[node name="OffSprite" type="Sprite2D" parent="." unique_id=1483757360]
 position = Vector2(1, -1)
 scale = Vector2(1.0625, 1.0416666)
-texture = ExtResource("1_xsm40")
+texture = ExtResource("2_els25")
+
+[node name="OnSprite" type="Sprite2D" parent="." unique_id=342399696]
+visible = false
+position = Vector2(1, -1)
+scale = Vector2(1.0625, 1.0416666)
+texture = ExtResource("3_els25")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=383307647]
 collision_layer = 255

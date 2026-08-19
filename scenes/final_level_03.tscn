@@ -513,15 +513,25 @@ texture_region_size = Vector2i(32, 32)
 29:3/0 = 0
 29:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 25:13/0 = 0
+25:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 25:14/0 = 0
+25:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 25:15/0 = 0
+25:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 25:16/0 = 0
+25:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 25:17/0 = 0
+25:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 27:13/0 = 0
+27:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 27:14/0 = 0
+27:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 27:15/0 = 0
+27:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 27:16/0 = 0
+27:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 27:17/0 = 0
+27:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_gqbav"]
 tile_size = Vector2i(32, 32)
@@ -984,7 +994,7 @@ tile_map_data = PackedByteArray("AABPACYAAQADAAMAAABOACYAAQADAAMAAABNACYAAQADAAM
 tile_set = SubResource("TileSet_isqls")
 
 [node name="Hider" type="TileMapLayer" parent="Tilesets" unique_id=1165317727]
-z_index = -2
+z_index = 1
 tile_map_data = PackedByteArray("AAAhACYAAQADAAMAAAAhACcAAQADAAMAAAAhACgAAQADAAMAAAAhACkAAQADAAMAAAAiACYAAQADAAMAAAAiACcAAQADAAMAAAAiACgAAQADAAMAAAAiACkAAQADAAMAAAAjACYAAQADAAMAAAAjACcAAQADAAMAAAAjACgAAQADAAMAAAAjACkAAQADAAMAAAAkACYAAQADAAMAAAAkACcAAQADAAMAAAAkACgAAQADAAMAAAAkACkAAQADAAMAAAAlACYAAQADAAMAAAAlACcAAQADAAMAAAAlACgAAQADAAMAAAAlACkAAQADAAMAAAAmACYAAQADAAMAAAAmACcAAQADAAMAAAAmACgAAQADAAMAAAAmACkAAQADAAMAAAAnACYAAQADAAMAAAAnACcAAQADAAMAAAAnACgAAQADAAMAAAAnACkAAQADAAMAAAAhACoAAQADAAMAAAAiACoAAQADAAMAAAAjACoAAQADAAMAAAAkACoAAQADAAMAAAAlACoAAQADAAMAAAAmACoAAQADAAMAAAAnACoAAQADAAMAAAAoACoAAQADAAMAAAAgACoAAQADAAMAAAAgACUAAQADAAMAAAAoACUAAQADAAMAAAAhACUAAQADAAMAAAAiACUAAQADAAMAAAAjACUAAQADAAMAAAAkACUAAQADAAMAAAAlACUAAQADAAMAAAAmACUAAQADAAMAAAAnACUAAQADAAMAAAAgACYAAQADAAMAAAAgACcAAQADAAMAAAAgACgAAQADAAMAAAAgACkAAQADAAMAAAAoACYAAQADAAMAAAAoACcAAQADAAMAAAAoACgAAQADAAMAAAAoACkAAQADAAMAAAA=")
 tile_set = SubResource("TileSet_1vgci")
 
