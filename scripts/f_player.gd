@@ -40,6 +40,9 @@ var right_tween_y: Tween
 var is_dead: bool = false
 var was_on_floor: bool = true
 var spawn_position: Vector2
+
+var cutscene_active: bool = false
+var _cutscene_velocity_x: float = 0.0
 var bob_time: float = 0.0
 
 var death_charge: float = 0.0
@@ -194,15 +197,24 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
+	if cutscene_active:
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		velocity.x = _cutscene_velocity_x
+		move_and_slide()
+		_handle_procedural_legs()
+		was_on_floor = is_on_floor()
+		return
+
 	var _map: Map = $Camera2D as Map
 	if _map != null:
 		if _map.is_map_open:
 			if not is_on_floor():
 				velocity += get_gravity() * delta
-				velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
-				move_and_slide()
-				was_on_floor = is_on_floor()
-				return
+			velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+			move_and_slide()
+			was_on_floor = is_on_floor()
+			return
 		
 
 	if Input.is_action_pressed("kill"):
@@ -387,3 +399,38 @@ func _get_closest_corpse(max_dist: float) -> FPlayer:
 				closest = corpse
 				
 	return closest
+
+func play_entry_cutscene(door_sprite: Sprite2D, door_collision: CollisionShape2D) -> void:
+	cutscene_active = true
+	global_position.x = -50.0
+
+	for child in get_children():
+		if child is Camera2D:
+			(child as Camera2D).reset_smoothing()
+			break
+
+	if facing_direction != 1:
+		_flip_player(1)
+
+	await get_tree().create_timer(0.8).timeout
+
+	# Open door (step through frames)
+	door_sprite.frame = 1
+	await get_tree().create_timer(0.15).timeout
+	door_sprite.frame = 2
+	door_collision.set_deferred("disabled", true)
+	await get_tree().create_timer(0.2).timeout
+
+	# Walk into the room
+	_cutscene_velocity_x = MAX_SPEED * 0.5
+	await get_tree().create_timer(0.9).timeout
+	_cutscene_velocity_x = 0.0
+
+	# Close door behind the player
+	await get_tree().create_timer(0.2).timeout
+	door_collision.set_deferred("disabled", false)
+	door_sprite.frame = 1
+	await get_tree().create_timer(0.15).timeout
+	door_sprite.frame = 0
+
+	cutscene_active = false

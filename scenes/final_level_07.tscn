@@ -595,6 +595,7 @@ Have some cake :)"
 label_settings = SubResource("LabelSettings_60ge6")
 
 [node name="CakePixelArt50" type="Sprite2D" parent="Tilesets" unique_id=514640521]
+z_index = 1
 position = Vector2(1569, 909)
 scale = Vector2(0.1, 0.06697032)
 texture = ExtResource("8_x2320")
